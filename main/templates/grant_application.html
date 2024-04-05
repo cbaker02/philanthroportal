@@ -1,0 +1,14 @@
+{% extends "base.html" %} {% block title %} Grant Application {% endblock %}
+{% block content %}
+
+<div class="application container">
+    <h2>Grant Application</h2>
+
+    <form method="post" action="{% url 'Grant Application'%} ">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+{% endblock %}
