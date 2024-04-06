@@ -1,5 +1,6 @@
 from django.db import migrations, models
 from django.contrib.auth.models import AbstractUser
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -13,10 +14,11 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     username = None
-    email = models.CharField(unique = True, max_length=200, null=True)
+    email = models.EmailField(unique = True, max_length=200, null=True)
 
     name = models.CharField(max_length=200, null=True)
-    phone = models.CharField(max_length=10, null=True)
+    # phone = models.CharField(max_length=10, null=True)
+    phone = PhoneNumberField(blank=True, default='(000)000-000')
 
     profile_image = models.ImageField(null=True)
     ACCT_TYPE = (('Non-For-Profit Organization', 'Non-For-Profit Organization'), ('Individual', 'Individual'), ('Corporation', 'Corporation'))

@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import TextInput,EmailInput
+from phonenumber_field.formfields import PhoneNumberField
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from .models import CustomUser
@@ -11,6 +12,8 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Enter message here...', 'class':'form-control'}), required=True)
 
 class CustomUserCreationForm(UserCreationForm):
+    name = forms.CharField(label='Full Name',  widget=forms.TextInput(attrs={'placeholder': 'Jane Doe', 'class':'form-control'}), max_length=100, required=True)
+    phone = PhoneNumberField(region="US", label='Phone Number')
     email = forms.EmailField()
     CHOICES = (('Non-For-Profit Organization', 'Non-For-Profit Organization'), ('Individual', 'Individual'), ('Corporation', 'Corporation'))
     account_type = forms.ChoiceField(choices=CHOICES)
