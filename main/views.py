@@ -1,7 +1,7 @@
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import ContactForm, CustomUserCreationForm, GrantApplication
+from .forms import *
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -60,7 +60,7 @@ def registerPage(request):
                 
                 # NFP
                 if account_type == "Non-For-Profit Organization":
-                    return redirect('NFPs')
+                    return render(request, 'nfpRegister.html')
                 
                 # CORP
                 elif account_type == "Corporation":
@@ -74,6 +74,36 @@ def registerPage(request):
         
         context = {'form': form}
         return render(request, 'register.html', context)
+    
+# TODO: Fill out and change the return
+def nfpRegister(request):
+    if request.method == 'POST':
+        form = nfpCreationForm(request.POST)
+        if form.is_valid():
+            address = form.cleaned_data['address']
+            address2 = form.cleaned_data['address2']
+            city = form.cleaned_data['city']
+            state = form.cleaned_data['state']
+            zipCode = form.cleaned_data['zipCode']
+            
+            org_name = form.cleaned_data['org_name']
+            bio = form.cleaned_data['bio']
+            items = form.cleaned_data['items']
+            
+            nfp = Nfp(address=address, address2=address2, city=city, state=state, zipCode=zipCode,
+                      org_name=org_name, bio=bio, items=items,)
+            nfp.save()
+            return redirect('Home')
+            
+    else:
+        form = nfpCreationForm()
+            
+    return redirect('NFPs')
+    
+    
+# TODO: Fill out and change the return
+def corpRegister(request):
+    return redirect('Home')
 
 def loginPage(request):
     # TODO: Update destination 

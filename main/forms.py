@@ -18,6 +18,19 @@ class CustomUserCreationForm(UserCreationForm):
         model = CustomUser
         fields = ['name', 'phone', 'email', 'password1', 'password2', 'account_type']
 
+class nfpCreationForm(forms.Form):
+    org_name = forms.CharField(max_length=200, label='Organization Name')
+    
+    address = forms.CharField(label='Address', max_length=200)
+    address2 = forms.CharField(max_length=200, label='Address 2')
+    city = forms.CharField(max_length=200, label='City')
+    state = forms.CharField(max_length=2, label='State',)
+    zipCode = forms.CharField(max_length=5, label='Zip Code')
+    
+    bio = forms.CharField(max_length=10000, label= 'Biography')
+    items = forms.CharField(max_length=2000, label='Items wanted for Donation')
+    #tags to be added later
+    
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
