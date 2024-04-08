@@ -1,6 +1,7 @@
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.generic import TemplateView
 from .forms import *
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
