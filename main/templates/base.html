@@ -39,7 +39,7 @@
       <!--Logout button-->
       <span class="hello-msg" style="font-size: 18px; margin-right: 20px">
         {% if request.user.is_authenticated %}
-          Hello, {{request.user}}
+          Hello, {{request.user.name}}
         {% endif %}
       </span>
       <span class="hello-msg" style="font-size: 18px; margin-right: 20px"><a href="{% url 'logout' %}">

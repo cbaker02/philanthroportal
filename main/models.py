@@ -1,5 +1,6 @@
 from django.db import migrations, models
 from django.contrib.auth.models import AbstractUser
+from phonenumber_field.modelfields import PhoneNumberField
 
 # Create your models here.
 
@@ -13,10 +14,11 @@ from django.contrib.auth.models import AbstractUser
 
 class CustomUser(AbstractUser):
     username = None
-    email = models.CharField(unique = True, max_length=200, null=True)
+    email = models.EmailField(unique = True, max_length=200, null=True)
 
     name = models.CharField(max_length=200, null=True)
-    phone = models.CharField(max_length=10, null=True)
+    # phone = models.CharField(max_length=10, null=True)
+    phone = PhoneNumberField(blank=True, default='(000)000-000')
 
     profile_image = models.ImageField(null=True)
     ACCT_TYPE = (('Non-For-Profit Organization', 'Non-For-Profit Organization'), ('Individual', 'Individual'), ('Corporation', 'Corporation'))
@@ -33,14 +35,14 @@ class Nfp(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True) # Delete profile when user is deleted
 
     address = models.CharField(max_length=200, null=True)
-    address2 = models.CharField(max_length=200, null=True)
+    address2 = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=2, null=True)
     zipCode = models.CharField(max_length=5, null=True)
     
     org_name = models.CharField(max_length=200, null=True)
     bio = models.TextField(max_length=1000, null=True)
-    items = models.CharField(max_length=2000, null=True)
+    items = models.CharField(max_length=2000, null=False)
     #tags to be added later
     date_created = models.DateTimeField(auto_now_add=True, null=True)
 
@@ -51,7 +53,7 @@ class Corporation(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
 
     address = models.CharField(max_length=200, null=True)
-    address2 = models.CharField(max_length=200, null=True)
+    address2 = models.CharField(max_length=200, null=False)
     city = models.CharField(max_length=200, null=True)
     state = models.CharField(max_length=2, null=True)
     zipCode = models.CharField(max_length=5, null=True)
