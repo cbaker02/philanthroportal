@@ -1,10 +1,7 @@
 from django.db import migrations, models
 from django.contrib.auth.models import AbstractUser
-<<<<<<< Updated upstream
-=======
 from phonenumber_field.modelfields import PhoneNumberField
 import uuid
->>>>>>> Stashed changes
 
 # Create your models here.
 
