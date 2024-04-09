@@ -53,19 +53,20 @@ def registerPage(request):
             form = CustomUserCreationForm(request.POST)
             if form.is_valid():
                 form.save()
+                '''
                 user = form.cleaned_data.get('email').__str__()
+                '''
                 account_type = form.cleaned_data['account_type']
-                print(account_type)
                 
                 # TODO: Change to proper redirect
                 
                 # NFP
                 if account_type == "Non-For-Profit Organization":
-                    return render(request, 'nfpRegister.html')
+                    return redirect('NFP Register')
                 
                 # CORP
                 elif account_type == "Corporation":
-                    return redirect('Grant Application')
+                    return redirect('Corp Register')
                 
                 # INDVIDUAL
                 else:
@@ -78,33 +79,60 @@ def registerPage(request):
     
 # TODO: Fill out and change the return
 def nfpRegister(request):
-    if request.method == 'POST':
-        form = nfpCreationForm(request.POST)
-        if form.is_valid():
-            address = form.cleaned_data['address']
-            address2 = form.cleaned_data['address2']
-            city = form.cleaned_data['city']
-            state = form.cleaned_data['state']
-            zipCode = form.cleaned_data['zipCode']
-            
-            org_name = form.cleaned_data['org_name']
-            bio = form.cleaned_data['bio']
-            items = form.cleaned_data['items']
-            
-            nfp = Nfp(address=address, address2=address2, city=city, state=state, zipCode=zipCode,
-                      org_name=org_name, bio=bio, items=items,)
-            nfp.save()
-            return redirect('Home')
-            
+    if request.user.is_authenticated:
+        return redirect('Home')
     else:
         form = nfpCreationForm()
+        if request.method == 'POST':
+            form = nfpCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                
+                address = form.cleaned_data['address']
+                address2 = form.cleaned_data['address2']
+                city = form.cleaned_data['city']
+                state = form.cleaned_data['state']
+                zipCode = form.cleaned_data['zipCode']
             
-    return redirect('NFPs')
-    
+                org_name = form.cleaned_data['org_name']
+                bio = form.cleaned_data['bio']
+                items = form.cleaned_data['items']
+                
+                '''
+                nfp = Nfp(address=address, address2=address2, city=city, state=state, zipCode=zipCode,
+                      org_name=org_name, bio=bio, items=items,)
+                nfp.save()
+                '''
+
+                
+                return redirect('Home')
+        context = {'form': form}
+        return render(request, "nfpRegister.html", context)
     
 # TODO: Fill out and change the return
 def corpRegister(request):
-    return redirect('Home')
+    if request.user.is_authenticated:
+        return redirect('Home')
+    else:
+        form = corpCreationForm()
+        
+        if request.method == 'POST':
+            form = corpCreationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                address = form.cleaned_data['address']
+                address2 = form.cleaned_data['address2']
+                city = form.cleaned_data['city']
+                state = form.cleaned_data['state']
+                zipCode = form.cleaned_data['zipCode']
+            
+                corp_name = form.cleaned_data['corp_name']
+                bio = form.cleaned_data['bio']
+            
+            return redirect('Home')
+        
+        context = {'form': form}
+        return render(request, 'corpRegister.html', context)
 
 def loginPage(request):
     # TODO: Update destination 

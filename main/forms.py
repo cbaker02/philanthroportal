@@ -3,7 +3,7 @@ from django.forms import TextInput,EmailInput
 from phonenumber_field.formfields import PhoneNumberField
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import CustomUser, Nfp
+from .models import CustomUser, Nfp, Corporation
 
 class ContactForm(forms.Form):
     your_name = forms.CharField(label='Full Name', widget=forms.TextInput(attrs={'placeholder': 'Jane Doe', 'class':'form-control'}), max_length=100, required=True)
@@ -22,10 +22,9 @@ class CustomUserCreationForm(UserCreationForm):
         fields = ['name', 'phone', 'email', 'password1', 'password2', 'account_type']
 
 class nfpCreationForm(forms.Form):
-    org_name = forms.CharField(max_length=200, label='Organization Name')
-    
-    address = forms.CharField(label='Address', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    address2 = forms.CharField(max_length=200, label='Address 2', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    org_name = forms.CharField(label='Organization Name', widget=forms.TextInput(attrs={'placeholder': 'Organization Name...', 'class': 'form-control'}),max_length=200, required=True)
+    address = forms.CharField(label='Address', max_length=200, widget=forms.TextInput(attrs={'placeholder': '123 Main St.','class': 'form-control'}))
+    address2 = forms.CharField(max_length=200, label='Address 2', widget=forms.TextInput(attrs={'placeholder': 'Suite #456', 'class': 'form-control'}))
     city = forms.CharField(max_length=200, label='City', widget=forms.TextInput(attrs={'class': 'form-control'}))
     state = forms.CharField(max_length=2, label='State', widget=forms.TextInput(attrs={'class': 'form-control'}))
     zipCode = forms.CharField(max_length=5, label='Zip Code', widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -36,8 +35,20 @@ class nfpCreationForm(forms.Form):
     class Meta:
         model = Nfp
         fields = ['org_name', 'address', 'address2', 'city', 'state', 'zipCode',]
-        
+
+class corpCreationForm(forms.Form):
+    corp_name = forms.CharField(label='Corporation Name', widget=forms.TextInput(attrs={'placeholder': 'Corporation Name...', 'class': 'form-control'}),max_length=200, required=True)
+    address = forms.CharField(label='Address', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    address2 = forms.CharField(max_length=200, label='Address 2', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    city = forms.CharField(max_length=200, label='City', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    state = forms.CharField(max_length=2, label='State', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    zipCode = forms.CharField(max_length=5, label='Zip Code', widget=forms.TextInput(attrs={'class': 'form-control'}))
     
+    bio = forms.CharField(max_length=10000, label= 'Biography', widget=forms.Textarea(attrs={'class': 'form-control'}))
+    class Meta:
+        model = Corporation
+        fields = ['corp_name', 'address', 'address2', 'city', 'state', 'zipCode', 'bio']
+
 class CustomUserChangeForm(UserChangeForm):
     class Meta:
         model = CustomUser
