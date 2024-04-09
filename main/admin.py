@@ -5,10 +5,12 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 # Register your models here.
 
-from .models import Nfp, Corporation
+from .models import Nfp, Corporation, Grant, GrantApplication
 
 admin.site.register(Nfp)
 admin.site.register(Corporation)
+admin.site.register(Grant)
+admin.site.register(GrantApplication)
 
 
 class CustomUserAdmin(UserAdmin):
@@ -22,7 +24,7 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ()
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('name', 'phone')})
+        ('Personal info', {'fields': ('name', 'phone', 'profile_image', 'account_type')})
     )
     add_fieldsets = (
     (None, {

@@ -1,5 +1,10 @@
 from django.db import migrations, models
 from django.contrib.auth.models import AbstractUser
+<<<<<<< Updated upstream
+=======
+from phonenumber_field.modelfields import PhoneNumberField
+import uuid
+>>>>>>> Stashed changes
 
 # Create your models here.
 
@@ -61,3 +66,37 @@ class Corporation(models.Model):
 
     def __str__(self):
         return self.corp_name
+
+class Grant(models.Model):
+    
+    grant_id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
+    grant_name = models.CharField(max_length=200, null=True)
+
+    amount = models.DecimalField(max_digits=19, decimal_places=4, null=True)
+    corp = models.ForeignKey(Corporation, on_delete=models.CASCADE, null=True)
+    description = models.TextField(max_length=1000, null=True)
+    due_date = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return self.grant_name
+    
+class GrantApplication(models.Model):
+
+    app_id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
+    grant = models.ForeignKey(Grant, on_delete=models.CASCADE, null=True)
+    nfp = models.ForeignKey(Nfp, on_delete=models.CASCADE, null=True)
+    body = models.TextField(max_length=1000, null=True)
+    
+    PENDING = 'pending'
+    ACCEPTED = 'accepted'
+    REJECTED = 'rejected'
+    STATUSES = (
+        (PENDING, 'pending'),
+        (ACCEPTED, 'accepted'),
+        (REJECTED, 'rejected')
+    )
+    status =  models.CharField(max_length = 200, choices = STATUSES, default = 'pending')
+    status_changed = models.DateTimeField(null=True, editable=True, blank=True)
+
+    def __str__(self):
+        return self.grant.grant_name + " application - " + self.nfp.org_name
