@@ -2,7 +2,7 @@
 {% block content %}
 
 <h2>Register your Corporation</h2>
-<form method="post">
+<form method="POST">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit">Submit</button>

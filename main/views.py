@@ -98,14 +98,12 @@ def nfpRegister(request):
                 bio = form.cleaned_data['bio']
                 items = form.cleaned_data['items']
                 
-                '''
                 nfp = Nfp(address=address, address2=address2, city=city, state=state, zipCode=zipCode,
                       org_name=org_name, bio=bio, items=items,)
                 nfp.save()
-                '''
-
                 
                 return redirect('Home')
+            
         context = {'form': form}
         return render(request, "nfpRegister.html", context)
     
