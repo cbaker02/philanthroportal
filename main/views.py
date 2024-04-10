@@ -1,7 +1,7 @@
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import ContactForm, CustomUserCreationForm, GrantApplication
+from .forms import ContactForm, CustomUserCreationForm, GrantApplication, CreateGrant, CreateGrantModelForm
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -66,7 +66,7 @@ def registerPage(request):
                 elif account_type == "Corporation":
                     return redirect('Grant Application')
                 
-                # INDVIDUAL
+                # INDIVIDUAL
                 else:
                     return redirect('Home')
                 # messages.success(request, 'Account was created for ', user)
@@ -101,6 +101,24 @@ def logoutUser(request):
         return redirect('Home')
     else:
         return redirect('login')
+    
+def createGrantModelForm(request):
+    if request.method == 'POST':
+        form = CreateGrantModelForm(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = CreateGrantModelForm
+    return render(request, 'createGrant.html', {'form': form})
+
+'''def createGrant(request):
+    if request.method == 'POST':
+        form = CreateGrant(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = CreateGrant()
+    return render(request, 'createGrant.html', {'form': form})'''
     
 def grantApplication(request):
     #TODO: Catherine

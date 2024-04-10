@@ -10,5 +10,6 @@ urlpatterns = [
     path("register/", views.registerPage, name = "register"),
     path("login/", views.loginPage, name = "login"),
     path("logout/", views.logoutUser, name="logout"),
-    path("grant_application", views.grantApplication, name="Grant Application")
+    path("grant_application", views.grantApplication, name="Grant Application"),
+    path('createGrantModelForm', views.createGrantModelForm, name="Create Grant"),
 ]
