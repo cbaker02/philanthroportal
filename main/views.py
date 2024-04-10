@@ -53,12 +53,8 @@ def registerPage(request):
             form = CustomUserCreationForm(request.POST)
             if form.is_valid():
                 form.save()
-                '''
-                user = form.cleaned_data.get('email').__str__()
-                '''
+
                 account_type = form.cleaned_data['account_type']
-                
-                # TODO: Change to proper redirect
                 
                 # NFP
                 if account_type == "Non-For-Profit Organization":
@@ -71,13 +67,10 @@ def registerPage(request):
                 # INDVIDUAL
                 else:
                     return redirect('Home')
-                # messages.success(request, 'Account was created for ', user)
-                #return redirect('login')
         
         context = {'form': form}
         return render(request, 'register.html', context)
     
-# TODO: Fill out and change the return
 def nfpRegister(request):
     if request.user.is_authenticated:
         return redirect('Home')
@@ -86,26 +79,20 @@ def nfpRegister(request):
         if request.method == 'POST':
             form = nfpCreationForm(request.POST)
             if form.is_valid():
-                form.save()
                 
                 address = form.cleaned_data['address']
                 address2 = form.cleaned_data['address2']
                 city = form.cleaned_data['city']
                 state = form.cleaned_data['state']
                 zipCode = form.cleaned_data['zipCode']
-            
                 org_name = form.cleaned_data['org_name']
                 bio = form.cleaned_data['bio']
-                items = form.cleaned_data['items']
                 
-                '''
                 nfp = Nfp(address=address, address2=address2, city=city, state=state, zipCode=zipCode,
-                      org_name=org_name, bio=bio, items=items,)
+                      org_name=org_name, bio=bio,)
                 nfp.save()
-                '''
-
-                
-                return redirect('Home')
+            
+                return redirect('login')
         context = {'form': form}
         return render(request, "nfpRegister.html", context)
     
@@ -119,7 +106,7 @@ def corpRegister(request):
         if request.method == 'POST':
             form = corpCreationForm(request.POST)
             if form.is_valid():
-                form.save()
+                #form.save()
                 address = form.cleaned_data['address']
                 address2 = form.cleaned_data['address2']
                 city = form.cleaned_data['city']
@@ -128,8 +115,12 @@ def corpRegister(request):
             
                 corp_name = form.cleaned_data['corp_name']
                 bio = form.cleaned_data['bio']
+
+                corp = Corporation(address=address, address2=address2, city=city, state=state, zipCode=zipCode,
+                      corp_name=corp_name, bio=bio,)
+                corp.save()
             
-            return redirect('Home')
+            return redirect('login')
         
         context = {'form': form}
         return render(request, 'corpRegister.html', context)
