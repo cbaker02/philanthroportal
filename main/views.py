@@ -1,7 +1,7 @@
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
-from .forms import ContactForm, CustomUserCreationForm, GrantApplication, CreateGrant, CreateGrantModelForm
+from .forms import ContactForm, CustomUserCreationForm, CreateGrant, CreateGrantApplication
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -102,30 +102,24 @@ def logoutUser(request):
     else:
         return redirect('login')
     
-def createGrantModelForm(request):
-    if request.method == 'POST':
-        form = CreateGrantModelForm(request.POST)
-        if form.is_valid():
-            pass
-    else:
-        form = CreateGrantModelForm
-    return render(request, 'createGrant.html', {'form': form})
-
-'''def createGrant(request):
+def createGrant(request):
     if request.method == 'POST':
         form = CreateGrant(request.POST)
         if form.is_valid():
-            pass
+            #This creates the grant object and saves it to the database
+            grant = form.save()
+            messages.success(request, 'Grant created: ' + grant.grant_name)
     else:
-        form = CreateGrant()
-    return render(request, 'createGrant.html', {'form': form})'''
+        form = CreateGrant
+    return render(request, 'createGrant.html', {'form': form})
     
 def grantApplication(request):
     #TODO: Catherine
     if request.method == 'POST':
-        form = GrantApplication(request.POST)
+        form = CreateGrantApplication(request.POST)
         if form.is_valid():
-            pass
+            grant_application = form.save()
+            messages.success(request, 'Application Submitted')
     else:
-        form = GrantApplication()
+        form = CreateGrantApplication
     return render(request, "grant_application.html", {'form': form})
