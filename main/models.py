@@ -84,15 +84,9 @@ class GrantApplication(models.Model):
     nfp = models.ForeignKey(Nfp, on_delete=models.CASCADE, null=True)
     body = models.TextField(max_length=1000, null=True)
     
-    PENDING = 'pending'
-    ACCEPTED = 'accepted'
-    REJECTED = 'rejected'
-    STATUSES = (
-        (PENDING, 'pending'),
-        (ACCEPTED, 'accepted'),
-        (REJECTED, 'rejected')
-    )
-    status =  models.CharField(max_length = 200, choices = STATUSES, default = 'pending')
+    STATUS = (('Pending', 'PENDING'), ('Accepted', 'ACCEPTED'), ('Rejected', 'REJECTED'))
+    
+    current_status =  models.CharField(max_length = 200, choices = STATUS, default = 'Pending')
     status_changed = models.DateTimeField(null=True, editable=True, blank=True)
 
     def __str__(self):

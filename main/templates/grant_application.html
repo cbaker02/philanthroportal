@@ -4,6 +4,11 @@
 
 <h2>Grant Application</h2>
 
+<!-- We might need to change this/ views so that the Grant is inherited through clicking the apply button 
+     Also to inherited the current NFP since only NFP should be able to submit an application for themselves.
+    
+    This will most likely need to be done after the registration bug has been resolved. -->
+
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
