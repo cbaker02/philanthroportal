@@ -103,6 +103,21 @@ def logoutUser(request):
         return redirect('login')
     
 def createGrant(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = CreateGrant(request.POST)
+            if form.is_valid():
+                #This creates the grant object and saves it to the database
+                grant = form.save()
+                messages.success(request, 'Grant created: ' + grant.grant_name)
+        else:
+            form = CreateGrant
+        return render(request, 'createGrant.html', {'form': form})
+    else: 
+        return redirect('Home')
+    
+'''    
+def createGrant(request):
     if request.method == 'POST':
         form = CreateGrant(request.POST)
         if form.is_valid():
@@ -112,6 +127,7 @@ def createGrant(request):
     else:
         form = CreateGrant
     return render(request, 'createGrant.html', {'form': form})
+'''
     
 def grantApplication(request):
     #TODO: Catherine
