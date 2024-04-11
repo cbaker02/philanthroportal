@@ -103,16 +103,23 @@ def logoutUser(request):
         return redirect('login')
     
 def createGrant(request):
-    if request.user.is_authenticated:
-        if request.method == 'POST':
-            form = CreateGrant(request.POST)
-            if form.is_valid():
-                #This creates the grant object and saves it to the database
-                grant = form.save()
-                messages.success(request, 'Grant created: ' + grant.grant_name)
-        else:
-            form = CreateGrant
-        return render(request, 'createGrant.html', {'form': form})
+    if (request.user.is_authenticated):
+        
+        if (request.user.account_type == 'Corporation' ):
+
+            if request.method == 'POST':
+                form = CreateGrant(request.POST)
+                if form.is_valid():
+                    
+                    #This creates the grant object and saves it to the database
+                    grant = form.save()
+                    messages.success(request, 'Grant created: ' + grant.grant_name)
+            else:
+                form = CreateGrant
+            return render(request, 'createGrant.html', {'form': form})
+        else: 
+            # Try to remove after permissions are established
+            return redirect('Home')
     else: 
         return redirect('Home')
     
@@ -130,12 +137,26 @@ def createGrant(request):
 '''
     
 def grantApplication(request):
-    #TODO: Catherine
-    if request.method == 'POST':
-        form = CreateGrantApplication(request.POST)
-        if form.is_valid():
-            grant_application = form.save()
-            messages.success(request, 'Application Submitted')
-    else:
-        form = CreateGrantApplication
-    return render(request, "grant_application.html", {'form': form})
+    if (request.user.is_authenticated):
+        
+        if (request.user.account_type == 'Non-For-Profit Organization'):
+    
+            #TODO: Catherine
+            if request.method == 'POST':
+                form = CreateGrantApplication(request.POST)
+                if form.is_valid():
+                    grant_application = form.save()
+                    messages.success(request, 'Application Submitted')
+            else:
+                form = CreateGrantApplication
+            return render(request, "grant_application.html", {'form': form})
+        else: 
+            # Try to remove after permissions are established
+            return redirect('Home')
+    else: 
+        return redirect('Home')
+    
+def grants(request):
+    grants = Grant.objects.all()
+
+    return render(request, "grants.html", {'Grant': grants})
