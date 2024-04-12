@@ -55,6 +55,9 @@ def registerPage(request):
                 form.save()
 
                 account_type = form.cleaned_data['account_type']
+                email=form.cleaned_data['email']
+                password=form.cleaned_data['password1']
+                account= authenticate(request, email=email,password=password)
                 
                 # NFP
                 if account_type == "Non-For-Profit Organization":
@@ -66,7 +69,9 @@ def registerPage(request):
                 
                 # INDVIDUAL
                 else:
-                    return redirect('Home')
+                    account= authenticate(request, email=email,password=password)
+                    login(request,account)
+                    return redirect ('Home')
         
         context = {'form': form}
         return render(request, 'register.html', context)
@@ -92,8 +97,13 @@ def nfpRegister(request):
                 nfp = Nfp(user=user,address=address, address2=address2, city=city, state=state, zipCode=zipCode,
                       org_name=org_name, bio=bio,)
                 nfp.save()
+
+                if user is not None:
+                    login(request,user)
+                    return redirect ('NFPs')
+                else:
+                    return redirect('Home')
             
-                return redirect('login')
         context = {'form': form}
         return render(request, "nfpRegister.html", context)
     
@@ -122,14 +132,11 @@ def corpRegister(request):
                       corp_name=corp_name, bio=bio,)
                 corp.save()
             
-            email= user.email
-            password= user.password
-            account= authenticate(request, email=email, password=password)
-            if account is not None:
-                login(request,account)
-                return redirect ('success')
-            else:
-                return redirect('Home')
+                if user is not None:
+                    login(request,user)
+                    return redirect ('NFPs')
+                else:
+                    return redirect('Home')
         
         context = {'form': form}
         return render(request, 'corpRegister.html', context)
