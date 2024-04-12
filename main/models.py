@@ -17,7 +17,6 @@ class CustomUser(AbstractUser):
     email = models.EmailField(unique = True, max_length=200, null=True)
 
     name = models.CharField(max_length=200, null=True)
-    # phone = models.CharField(max_length=10, null=True)
     phone = PhoneNumberField(blank=True, default='(000)000-000')
 
     profile_image = models.ImageField(null=True)
@@ -31,7 +30,6 @@ class CustomUser(AbstractUser):
         return self.email
         
 class Nfp(models.Model):
-
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True) # Delete profile when user is deleted
 
     address = models.CharField(max_length=200, null=True)

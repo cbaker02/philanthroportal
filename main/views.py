@@ -80,6 +80,7 @@ def nfpRegister(request):
             form = nfpCreationForm(request.POST)
             if form.is_valid():
                 
+                user = CustomUser.objects.order_by('-id')[0]
                 address = form.cleaned_data['address']
                 address2 = form.cleaned_data['address2']
                 city = form.cleaned_data['city']
@@ -88,7 +89,7 @@ def nfpRegister(request):
                 org_name = form.cleaned_data['org_name']
                 bio = form.cleaned_data['bio']
                 
-                nfp = Nfp(address=address, address2=address2, city=city, state=state, zipCode=zipCode,
+                nfp = Nfp(user=user,address=address, address2=address2, city=city, state=state, zipCode=zipCode,
                       org_name=org_name, bio=bio,)
                 nfp.save()
             
@@ -107,6 +108,7 @@ def corpRegister(request):
             form = corpCreationForm(request.POST)
             if form.is_valid():
                 #form.save()
+                user = CustomUser.objects.order_by('-id')[0]
                 address = form.cleaned_data['address']
                 address2 = form.cleaned_data['address2']
                 city = form.cleaned_data['city']
@@ -116,11 +118,18 @@ def corpRegister(request):
                 corp_name = form.cleaned_data['corp_name']
                 bio = form.cleaned_data['bio']
 
-                corp = Corporation(address=address, address2=address2, city=city, state=state, zipCode=zipCode,
+                corp = Corporation(user=user,address=address, address2=address2, city=city, state=state, zipCode=zipCode,
                       corp_name=corp_name, bio=bio,)
                 corp.save()
             
-            return redirect('login')
+            email= user.email
+            password= user.password
+            account= authenticate(request, email=email, password=password)
+            if account is not None:
+                login(request,account)
+                return redirect ('success')
+            else:
+                return redirect('Home')
         
         context = {'form': form}
         return render(request, 'corpRegister.html', context)
