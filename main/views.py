@@ -17,9 +17,9 @@ def home(request):
     return render(request, "home.html")
 
 def nfps(request):
-    nfps = Nfp.objects.all()
+    nfps_list = Nfp.objects.all()
 
-    return render(request, "nfps.html", {'nfps': nfps})
+    return render(request, "nfps.html", {'nfps_list': nfps_list})
 
 def contactus(request):
     if request.method == 'GET':
@@ -156,7 +156,7 @@ def grantApplication(request):
     else: 
         return redirect('Home')
     
-def grants(request):
-    grants = Grant.objects.all()
+def grant_list(request):
+    grant_list = Grant.objects.all()
 
-    return render(request, "grants.html", {'Grant': grants})
+    return render(request, "grants.html", {'grant_list': grant_list})

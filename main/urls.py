@@ -12,5 +12,5 @@ urlpatterns = [
     path("logout/", views.logoutUser, name="logout"),
     path("grant_application", views.grantApplication, name="Grant Application"),
     path('create_grant', views.createGrant, name="Create Grant"),
-    path('grants', views.grants, name="grants"),
+    path('grant_list', views.grant_list, name="grant_list"),
 ]
