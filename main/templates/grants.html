@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block title %} NFPs Page {% endblock %}
+{% extends "base.html" %} {% block title %} Grants Page {% endblock %}
 {% block content %}
 
 <!-- 
@@ -132,13 +132,14 @@
       </div>
     </div>
   </section>
-  {% for grants in grant_list %}
+
 
   <!-- Figure out how to make 3 across -->
 
   <div class="album py-3 bg-body-tertiary">
     <div class="container">
       <div class="row row-cols-md-3 g-3">
+        {% for grants in grant_list %}
         <div class="col">
           <div class="card shadow-sm">
             <!-- Figure how to add image from user profile -->
@@ -157,10 +158,11 @@
             </div>
           </div>
         </div>
+        {% endfor %}
       </div>
     </div>
   </div>
-  {% endfor %}
+  
 </main>
 
 <footer class="text-body-secondary py-5">
