@@ -52,6 +52,7 @@ class corpCreationForm(forms.Form):
         fields = ['corp_name', 'address', 'address2', 'city', 'state', 'zipCode', 'bio']
 
 class CustomUserChangeForm(UserChangeForm):
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     class Meta:
         model = CustomUser
         fields = ['email']
@@ -74,3 +75,11 @@ class CreateGrantApplication(ModelForm):
         widgets = {
             'body' : forms.Textarea(attrs={'class': 'form-control'}),
         }
+
+class UpdateProfileForm(forms.ModelForm):
+    profile_image= forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+    
+    class Meta:
+        model = CustomUser
+        fields = ['profile_image', 'bio']

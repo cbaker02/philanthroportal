@@ -6,7 +6,9 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _
+from PIL import Image
 import uuid
+
 
 # Create your models here.
 
@@ -56,6 +58,17 @@ class CustomUser(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    '''
+    def save(self, *args, **kwargs):
+        self.save()
+
+        img = Image.open(self.profile_image.path)
+
+        if img.height > 100 or img.width > 100:
+            new_img = (100, 100)
+            img.thumbnail(new_img)
+            img.save(self.profile_image.path)
+    '''
     def __str__(self):
         return self.email
         

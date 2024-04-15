@@ -138,3 +138,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #Added for ContactUs
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#Added for Profile Images
+MEDIA_ROOT = os.path.join(BASE_DIR, 'photos')
+MEDIA_URL = '/photos/'

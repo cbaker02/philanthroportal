@@ -2,6 +2,9 @@
 from django.contrib import admin
 from django.urls import path 
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+from main.views import ChangePasswordView
 
 urlpatterns = [
     path("", views.home, name="Home"),
@@ -19,5 +22,7 @@ urlpatterns = [
     path('my_grants', views.my_grants, name="my_grants"),
     path('my_applications', views.my_applications, name="my_applications"),
     path('nfp_donation', views.nfp_donation, name="nfp_donation"),
-    path('indv_donation', views.indv_donation, name="indv_donation")
-]
+    path('indv_donation', views.indv_donation, name="indv_donation"),
+    path('profile/', views.profile, name='users-profile'),
+    path('password-change/', ChangePasswordView.as_view(),name='password_change')
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
