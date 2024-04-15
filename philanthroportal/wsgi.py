@@ -12,7 +12,6 @@ import os
 from django.core.wsgi import get_wsgi_application
 from django.contrib import admin
 
-
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'philanthroportal.settings')
 
 application = get_wsgi_application()

@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block title %} Create Grant {% endblock %}
+{% block content %}
+
+<h2>Create Grant</h2>
+	<form action="" method="post">
+  		{% csrf_token %}
+  		{{ form.as_p }}
+  		<button type="submit">Submit</button>
+	</form>
+
+{% for message in messages %}
+    <p id="messages" style="color: green">{{message}}</p>
+{% endfor %}
+
+{% endblock %}

@@ -1,3 +1,4 @@
+#main/views.py
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
@@ -18,9 +19,9 @@ def home(request):
     return render(request, "home.html")
 
 def nfps(request):
-    nfps = Nfp.objects.all()
+    nfps_list = Nfp.objects.all()
 
-    return render(request, "nfps.html", {'nfps': nfps})
+    return render(request, "nfps.html", {'nfps_list': nfps_list})
 
 def contactus(request):
     if request.method == 'GET':
@@ -168,12 +169,93 @@ def logoutUser(request):
     else:
         return redirect('login')
     
+def createGrant(request):
+    if (request.user.is_authenticated):
+        
+        if (request.user.account_type == 'Corporation' ):
+
+            if request.method == 'POST':
+                form = CreateGrant(request.POST)
+                if form.is_valid():
+                    
+                    #This creates the grant object and saves it to the database
+                    grant = form.save()
+                    messages.success(request, 'Grant created: ' + grant.grant_name)
+            else:
+                form = CreateGrant
+            return render(request, 'createGrant.html', {'form': form})
+        else: 
+            # Try to remove after permissions are established
+            return redirect('Home')
+    else: 
+        return redirect('Home')
+    
 def grantApplication(request):
-    #TODO: Catherine
-    if request.method == 'POST':
-        form = GrantApplication(request.POST)
-        if form.is_valid():
-            pass
-    else:
-        form = GrantApplication()
-    return render(request, "grant_application.html", {'form': form})
+    if (request.user.is_authenticated):
+        
+        if (request.user.account_type == 'Non-For-Profit Organization'):
+    
+            #TODO: Catherine
+            if request.method == 'POST':
+                form = CreateGrantApplication(request.POST)
+                if form.is_valid():
+                    grant_application = form.save()
+                    messages.success(request, 'Application Submitted')
+                    return redirect(request, "grants.html", {'grant_list': grant_list})
+            else:
+                form = CreateGrantApplication
+            return render(request, "grant_application.html", {'form': form})
+        else: 
+            # Try to remove after permissions are established
+            return redirect('Home')
+    else: 
+        return redirect('Home')
+    
+def grant_list(request):
+    grant_list = Grant.objects.all()
+
+    return render(request, "grants.html", {'grant_list': grant_list})
+
+def my_grants(request):
+    if (request.user.is_authenticated):
+        
+        if (request.user.account_type == 'Corporation' ):
+            return render(request, 'my_grants.html')
+        else: 
+            # Try to remove after permissions are established
+            return redirect('Home')
+    else: 
+        return redirect('Home')
+    
+def my_applications(request):
+    if (request.user.is_authenticated):
+        
+        if (request.user.account_type == 'Non-For-Profit Organization' ):
+            return render(request, 'my_applications.html')
+        else: 
+            # Try to remove after permissions are established
+            return redirect('Home')
+    else: 
+        return redirect('Home')
+    
+def nfp_donation(request):
+    if (request.user.is_authenticated):
+        
+        if (request.user.account_type == 'Non-For-Profit Organization' ):
+            return render(request, 'nfp_donation.html')
+        else: 
+            # Try to remove after permissions are established
+            return redirect('Home')
+    else: 
+        return redirect('Home')
+    
+def indv_donation(request):
+    if (request.user.is_authenticated):
+        
+        if (request.user.account_type == 'Individual' ):
+            return render(request, 'indv_donation.html')
+        else: 
+            # Try to remove after permissions are established
+            return redirect('Home')
+    else: 
+        return redirect('Home')
