@@ -191,6 +191,7 @@ def createGrant(request):
         return redirect('Home')
     
 def grantApplication(request):
+    model = GrantApplication
     if (request.user.is_authenticated):
         
         if (request.user.account_type == 'Non-For-Profit Organization'):
@@ -199,9 +200,11 @@ def grantApplication(request):
             if request.method == 'POST':
                 form = CreateGrantApplication(request.POST)
                 if form.is_valid():
-                    grant_application = form.save()
+                    grant_application = form.save(commit=False)
+                    grant_application.nfp = CustomUser.objects.get(pk=request.user.id)
+                    grant_application.save()
                     messages.success(request, 'Application Submitted')
-                    return redirect(request, "grants.html", {'grant_list': grant_list})
+                    #return redirect(request, "grants.html", {'grant_list': grant_list})
             else:
                 form = CreateGrantApplication
             return render(request, "grant_application.html", {'form': form})

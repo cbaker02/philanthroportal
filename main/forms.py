@@ -70,7 +70,7 @@ class CreateGrant(ModelForm):
 class CreateGrantApplication(ModelForm):
     class Meta:
         model = GrantApplication
-        fields =  ['grant', 'nfp', 'body']
+        fields =  ['grant', 'body']
         widgets = {
             'body' : forms.Textarea(attrs={'class': 'form-control'}),
         }

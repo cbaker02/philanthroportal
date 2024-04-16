@@ -111,13 +111,13 @@ class GrantApplication(models.Model):
 
     app_id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
     grant = models.ForeignKey(Grant, on_delete=models.CASCADE, null=True)
-    nfp = models.ForeignKey(Nfp, on_delete=models.CASCADE, null=True)
+    nfp = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     body = models.TextField(max_length=1000, null=True)
     
     STATUS = (('Pending', 'PENDING'), ('Accepted', 'ACCEPTED'), ('Rejected', 'REJECTED'))
     
     current_status =  models.CharField(max_length = 200, choices = STATUS, default = 'Pending')
-    status_changed = models.DateTimeField(null=True, editable=True, blank=True)
+    status_changed = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
         return self.grant.grant_name + " application - " + self.nfp.org_name
