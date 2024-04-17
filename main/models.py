@@ -75,17 +75,17 @@ class CustomUser(AbstractUser):
 class Nfp(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True) # Delete profile when user is deleted
 
-    address = models.CharField(max_length=200, null=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
     address2 = models.CharField(max_length=200, null=True, blank=True)
-    city = models.CharField(max_length=200, null=True)
-    state = models.CharField(max_length=2, null=True)
-    zipCode = models.CharField(max_length=5, null=True)
+    city = models.CharField(max_length=200, null=True,blank=True)
+    state = models.CharField(max_length=2, null=True, blank=True)
+    zipCode = models.CharField(max_length=5, null=True, blank=True)
     
-    org_name = models.CharField(max_length=200, null=True)
-    bio = models.TextField(max_length=1000, null=True)
+    org_name = models.CharField(max_length=200, null=True, blank=True)
+    bio = models.TextField(max_length=1000, null=True, blank=True)
     items = models.CharField(max_length=2000, null=True, blank=True)
     #tags to be added later
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
     REQUIRED_FIELDS = []
 
@@ -95,14 +95,14 @@ class Nfp(models.Model):
 class Corporation(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, null=True)
 
-    address = models.CharField(max_length=200, null=True)
+    address = models.CharField(max_length=200, null=True, blank=True)
     address2 = models.CharField(max_length=200, null=True, blank=True)
-    city = models.CharField(max_length=200, null=True)
-    state = models.CharField(max_length=2, null=True)
-    zipCode = models.CharField(max_length=5, null=True)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    state = models.CharField(max_length=2, null=True, blank=True)
+    zipCode = models.CharField(max_length=5, null=True, blank=True)
     
-    corp_name = models.CharField(max_length=200, null=True)
-    bio = models.TextField(max_length=1000, null=True)
+    corp_name = models.CharField(max_length=200, null=True, blank=True)
+    bio = models.TextField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return self.corp_name

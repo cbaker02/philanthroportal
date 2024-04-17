@@ -52,10 +52,12 @@ class corpCreationForm(forms.Form):
         fields = ['corp_name', 'address', 'address2', 'city', 'state', 'zipCode', 'bio']
 
 class CustomUserChangeForm(UserChangeForm):
-    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    #email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    phone = PhoneNumberField(region="US", label='Phone Number',required=False)
+    profile_image= forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}), required=False)
     class Meta:
         model = CustomUser
-        fields = ['email']
+        fields = ['phone','profile_image']
         
 class CreateGrant(ModelForm):
     class Meta:
@@ -76,10 +78,28 @@ class CreateGrantApplication(ModelForm):
             'body' : forms.Textarea(attrs={'class': 'form-control'}),
         }
 
-class UpdateProfileForm(forms.ModelForm):
-    profile_image= forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}))
+class UpdateNFPForm(forms.ModelForm):
+    address = forms.CharField(label='Address', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+    address2 = forms.CharField(max_length=200, label='Address 2', widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
+    city = forms.CharField(max_length=200, label='City', widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+    state = forms.CharField(max_length=2, label='State', widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+    zipCode = forms.CharField(max_length=5, label='Zip Code', widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+   
+    items = forms.CharField(max_length=2000, label='Items wanted for Donation', widget=forms.Textarea(attrs={'class': 'form-control'}), required=False)
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5}),required=False)
     
     class Meta:
-        model = CustomUser
-        fields = ['profile_image', 'bio']
+        model = Nfp
+        fields = [ 'address', 'address2', 'city', 'state', 'zipCode','items', 'bio']
+
+class UpdateCorporationForm(forms.ModelForm):
+    address = forms.CharField(label='Address', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
+    address2 = forms.CharField(max_length=200, label='Address 2', widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
+    city = forms.CharField(max_length=200, label='City', widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
+    state = forms.CharField(max_length=2, label='State', widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
+    zipCode = forms.CharField(max_length=5, label='Zip Code', widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
+    
+    bio = forms.CharField(max_length=10000, label= 'Biography', widget=forms.Textarea(attrs={'class': 'form-control'}),required=False)
+    class Meta:
+        model = Corporation
+        fields = ['address', 'address2', 'city', 'state', 'zipCode', 'bio']

@@ -270,18 +270,43 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     
 @login_required 
 def profile(request):
+    context = {}
+    nfp_form = None
+    corp_form = None
     if request.method == 'POST':
         user_form= CustomUserChangeForm(request.POST, instance=request.user)
-        profile_form= UpdateProfileForm(request.POST, request.FILES, instance=request.user)
-    
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-            messages.success(request, 'Your profile is updated successfully')
-            return redirect(to='users-profile')
+
+        if request.user.account_type == 'Individual':
+            if user_form.is_valid():
+                user_form.save()
+                messages.success(request, 'Your profile is updated successfully')
+                return redirect(to='users-profile')
+        elif request.user.account_type == 'Non-For-Profit Organization':
+            nfp_form= UpdateNFPForm(request.POST, instance=request.user.nfp)
+            if nfp_form.is_valid() and user_form.is_valid():
+                user_form.save()
+                nfp_form.save()
+                messages.success(request, 'Your profile is updated successfully')
+                return redirect(to='users-profile')
+        elif request.user.account_type == 'Corporation':
+            corp_form=UpdateCorporationForm(request.POST, instance=request.user.corporation)
+            if user_form.is_valid() and corp_form.is_valid():
+                user_form.save()
+                corp_form.save()
+                messages.success(request, 'Your profile is updated successfully')
+                return redirect(to='users-profile')
     else:
-        user_form = CustomUserChangeForm(instance = request.user)
-        profile_form = UpdateProfileForm(instance=request.user)
+        user_form= CustomUserChangeForm(instance=request.user)
+        if request.user.account_type == 'Non-For-Profit Organization':
+            nfp_form= UpdateNFPForm(instance=request.user.nfp)
+        elif request.user.account_type == 'Corporation':
+            corp_form=UpdateCorporationForm(instance=request.user.corporation)
+        
     
-    return render(request, 'profile.html', {'user_form': user_form, 'profile_form': profile_form})
+    context.update({
+        'user_form': user_form,
+        'nfp_form': nfp_form, 
+        'corp_form': corp_form})
+
+    return render(request, 'profile.html', context)
 

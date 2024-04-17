@@ -24,17 +24,84 @@
                 <div class="col-md-5">
                     <div class="form-group">
                         <label class="small mb-1">Email:</label>
-                        {{user_form.email}}
+                        {{user.email}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Phone Number:</label>
+                        {{user_form.phone}}
                     </div>
                     <div class="form-group">
                         <a href="{% url 'password_change' %}">Change Password</a>
                         <hr>
                         <label class="small mb-1">Change Profile Picture:</label>
-                        {{profile_form.profile_image}}       
-                    </div>        
-                    <label class="small mb-1">Bio:</label> {{ profile_form.bio }}
-                </div>
-            </div>          
+                        {{user_form.profile_image}}       
+                    </div>
+
+                    {% if user.account_type == 'Non-For-Profit Organization' %} 
+                    <div class="form-group">
+                        <label class="small mb-1">Non-For-Profit Name:</label>
+                        {{user.nfp.org_name}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Addresss:</label>
+                        {{nfp_form.address}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Addresss2:</label>
+                        {{nfp_form.address2}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">City:</label>
+                        {{nfp_form.city}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">State:</label>
+                        {{nfp_form.state}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Zip Code:</label>
+                        {{nfp_form.zipCode}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Desired Donation Items:</label>
+                        {{nfp_form.items}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Bio:</label>
+                        {{nfp_form.bio}}
+                    </div>
+                    {%endif%} 
+                      
+                    {% if user.account_type == 'Corporation' %} 
+                    <div class="form-group">
+                        <label class="small mb-1">Corporation Name:</label>
+                        {{user.corporation.corp_name}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Addresss:</label>
+                        {{corp_form.address}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Addresss2:</label>
+                        {{corp_form.address2}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">City:</label>
+                        {{corp_form.city}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">State:</label>
+                        {{corp_form.state}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Zip Code:</label>
+                        {{corp_form.zipCode}}
+                    </div>
+                    <div class="form-group">
+                        <label class="small mb-1">Bio:</label>
+                        {{corp_form.bio}}
+                    </div>
+                    {%endif%}         
             <br><br>
             <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>    
             <button type="reset" class="btn btn-dark btn-lg">Reset</button>

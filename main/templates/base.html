@@ -65,9 +65,15 @@
       </div>
 
       <!--Logout button-->
+      <span class="hello-msg" style="font-size: 18px; margin-right: 30px">
+        {% if not request.user.is_authenticated %}
+        <a href="{% url 'register' %}">Sign-up</a>
+        {% endif %}
+        </span>
+      
       <span class="hello-msg" style="font-size: 18px; margin-right: 20px">
         {% if request.user.is_authenticated %}
-          Hello, {{request.user.name}}
+        <a class="nav-link" href="{% url 'users-profile' %}">Hello, {{request.user.name}}</a>
         {% endif %}
       </span>
       <span class="hello-msg" style="font-size: 18px; margin-right: 20px"><a href="{% url 'logout' %}">
