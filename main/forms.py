@@ -70,7 +70,14 @@ class CreateGrant(ModelForm):
 class CreateGrantApplication(ModelForm):
     class Meta:
         model = GrantApplication
-        fields =  ['grant', 'body']
+        fields =  ['grant', 'body', 'current_status']
         widgets = {
             'body' : forms.Textarea(attrs={'class': 'form-control'}),
+            'current_status' : forms.HiddenInput(),
         }
+        
+class UpdateGrantApplicationStatus(forms.ModelForm):
+    class Meta:
+        model = GrantApplication
+        fields = ['current_status']
+        widgets = {'current_status' : forms.ChoiceField(choices=GrantApplication.STATUS)}
