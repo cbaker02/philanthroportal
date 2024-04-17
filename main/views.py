@@ -19,7 +19,22 @@ from django.urls import reverse_lazy
 # views in main/urls.py are referenced by philanthroportal/urls.py automatically
 
 def home(request):
-    return render(request, "home.html")
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['admin@example.com'])
+                
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('success')
+    return render(request, "home.html", {'form': form})
+
 
 def nfps(request):
     nfps_list = Nfp.objects.all()
