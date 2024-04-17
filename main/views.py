@@ -179,7 +179,9 @@ def createGrant(request):
                 if form.is_valid():
                     
                     #This creates the grant object and saves it to the database
-                    grant = form.save()
+                    grant = form.save(commit=False)
+                    grant.corp = CustomUser.objects.get(pk=request.user.id)
+                    grant.save()
                     messages.success(request, 'Grant created: ' + grant.grant_name)
             else:
                 form = CreateGrant
@@ -221,9 +223,13 @@ def grant_list(request):
 
 def my_grants(request):
     if (request.user.is_authenticated):
-        
         if (request.user.account_type == 'Corporation' ):
-            return render(request, 'my_grants.html')
+            curr_corp = CustomUser.objects.get(pk=request.user.id)
+            my_grants = Grant.objects.filter(corp_id=curr_corp)
+            
+            applications = GrantApplication.objects.all()
+            context = {'my_grants': my_grants, 'applications': applications}
+            return render(request, 'my_grants.html', context)
         else: 
             # Try to remove after permissions are established
             return redirect('Home')

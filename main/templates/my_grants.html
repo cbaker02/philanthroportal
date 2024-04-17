@@ -8,6 +8,14 @@
 -->
 
 <h2> My Grants</h2>
+{% for grants in my_grants %}
+<h3>{{ grants.grant_name }}</h4>
 
+    {% for apps in applications %}
+        {% if grants.grant_id == apps.grant_id%}
+        <p>Hello</p>
+        {% endif%}
+    {% endfor %}
+{% endfor %}
 
 {% endblock %}

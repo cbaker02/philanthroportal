@@ -97,10 +97,10 @@ class Corporation(models.Model):
 class Grant(models.Model):
     
     grant_id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True, editable=False)
-    grant_name = models.CharField(max_length=200, null=True)
+    grant_name = models.CharField(max_length=200, null=True, unique=True)
 
     amount = models.DecimalField(max_digits=19, decimal_places=2, null=True)
-    corp = models.ForeignKey(Corporation, on_delete=models.CASCADE, null=True)
+    corp = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True)
     description = models.TextField(max_length=1000, null=True)
     due_date = models.DateTimeField(null=True)
 
@@ -120,4 +120,4 @@ class GrantApplication(models.Model):
     status_changed = models.DateTimeField(auto_now_add=True, null=True)
 
     def __str__(self):
-        return self.grant.grant_name + " application - " + self.nfp.org_name
+        return self.grant.grant_name + " application - " + self.nfp.email
