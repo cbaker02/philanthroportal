@@ -226,9 +226,9 @@ def my_grants(request):
         if (request.user.account_type == 'Corporation' ):
             curr_corp = CustomUser.objects.get(pk=request.user.id)
             my_grants = Grant.objects.filter(corp_id=curr_corp)
-            
+            nfp = Nfp.objects.all()    
             applications = GrantApplication.objects.all()
-            context = {'my_grants': my_grants, 'applications': applications}
+            context = {'my_grants': my_grants, 'applications': applications, 'nfp': nfp}
             return render(request, 'my_grants.html', context)
         else: 
             # Try to remove after permissions are established

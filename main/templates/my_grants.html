@@ -13,8 +13,10 @@
 
     {% for apps in applications %}
         {% if grants.grant_id == apps.grant_id%}
-        <h5>{{ apps.current_status }}</h5>
+        {% if apps.nfp_id == nfp.id %}
+        <h5>{{ nfp.org_name }}</h5>
         <p>{{ apps.body }}</p>
+        {% endif %}
         {% endif%}
     {% endfor %}
 {% endfor %}
