@@ -224,10 +224,12 @@ def grant_list(request):
 def my_grants(request):
     if (request.user.is_authenticated):
         if (request.user.account_type == 'Corporation' ):
+            # Get Current corp ID
             curr_corp = CustomUser.objects.get(pk=request.user.id)
+            # Get Grants based on curr ID
             my_grants = Grant.objects.filter(corp_id=curr_corp)
             nfp = Nfp.objects.all()    
-            applications = GrantApplication.objects.all()
+            applications = GrantApplication.objects.all()        
             context = {'my_grants': my_grants, 'applications': applications, 'nfp': nfp}
             return render(request, 'my_grants.html', context)
         else: 
