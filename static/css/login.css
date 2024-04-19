@@ -4,7 +4,7 @@ html {
 	padding: 0;
 	height: 100%;
 	/* Change to match company colors */
-	background: #ebeff5 !important;
+	background: #fff !important;
 }
 .user_card {
 	width: 350px;
@@ -17,9 +17,9 @@ html {
 	justify-content: center;
 	flex-direction: column;
 	padding: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+	-webkit-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+	-moz-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
 	border-radius: 5px;
 
 }

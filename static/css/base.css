@@ -1,12 +1,11 @@
-
-
+/*establishes background color for all pages, padding that words with nav bar, and color for text*/
 body{
+    padding-top: 65px;
     background-color: #fff;
     color: #36151E;
-
-   
 }
 
+/*message cards*/
 .user_card {
 	width: auto;
 	margin-top: auto;
@@ -17,12 +16,11 @@ body{
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
-	padding: 10px;
+	padding: 15px;
 	box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
 	-webkit-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
 	-moz-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
 	border-radius: 5px;
-
 }
 
 .p1{
@@ -31,7 +29,7 @@ body{
 
 }
 
-.h3{
+h3{
     color: #36151E;
     /*font info, place all other css above this or it wont work*/
     font-family: "League Gothic", sans-serif;
@@ -54,10 +52,15 @@ ul {
   }
 
   footer {
-    text-align: center;
-    padding: 3px;
+    width:100%;
+    text-align: left;
+    border-radius: 5px;
+    bottom:0;
+    position:static;
+    padding: 20px;
     background-color: #D0CEBA;
-    color: white;
+    color: #36151E;
+    font-family:"Times New Roman", Times, serif ;
   }
   
 li {
@@ -83,11 +86,37 @@ li a:hover {
     background-color: #36674b;
   }
   
-  .input-group {
-	background: #f7ba5b !important;
-	color: white !important;
-	border: 0 !important;
-	border-radius: 0.25rem 0 0 0.25rem !important;
+  input, select, textarea {
+	width: 100%;
+  padding: 12px;
+  border: 1 px solid #36151E;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top:6px;
+  margin-bottom: 16px;
+  resize:vertical;
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+}
+
+button[type=submit] {
+  background-color: #417B5A;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+
+button[type=submit]:hover {
+  background-color: #36674b;
 }
 
 .hello-msg{

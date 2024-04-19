@@ -9,7 +9,7 @@ from .models import CustomUser, Nfp, Corporation, Grant, GrantApplication
 class ContactForm(forms.Form):
     your_name = forms.CharField(label='Full Name', widget=forms.TextInput(attrs={'placeholder': 'Jane Doe', 'class':'form-control'}), max_length=100, required=True)
     from_email = forms.EmailField(label = 'Email', widget=forms.EmailInput(attrs={'placeholder': 'janedoe@example.com', 'class':'form-control'}), required=True)
-    subject = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    subject = forms.CharField(required=False, widget=forms.TextInput(attrs={'placeholder': 'Subject of Email','class': 'form-control'}))
     message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Enter message here...', 'class':'form-control'}), required=True)
 
 class CustomUserCreationForm(UserCreationForm):
