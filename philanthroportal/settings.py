@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'phonenumber_field',
-    'sorl.thumbnail',
     #Added for ContactUs
     #'sendemail.apps.SendemailConfig', 
 ]
