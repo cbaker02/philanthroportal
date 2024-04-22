@@ -6,12 +6,13 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import *
 # Register your models here.
 
-from .models import Nfp, Corporation, Grant, GrantApplication
+from .models import Nfp, Corporation, Grant, GrantApplication, Donation
 
 admin.site.register(Nfp)
 admin.site.register(Corporation)
 admin.site.register(Grant)
 admin.site.register(GrantApplication)
+admin.site.register(Donation)
 
 
 class CustomUserAdmin(UserAdmin):

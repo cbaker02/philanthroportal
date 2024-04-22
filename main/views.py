@@ -9,6 +9,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from datetime import datetime
 # Create your views here.
 
 # NOTE: When adding a new view/template, make sure to add it to main/urls.py
@@ -247,11 +248,12 @@ def update_application_status(request, app_id):
                     application.current_status = 'Accepted'
                 elif 'reject' in request.POST:
                     application.current_status = 'Rejected'
+                application.status_changed = datetime.now()
                 application.save()
                 return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
             else:
                 grants = GrantApplication.objects.all()
-                context = {'': }
+                context = {'grants': grants}
                 return render(request, 'my_grants.html', context)
         else:
             return redirect('Home')
@@ -262,7 +264,16 @@ def my_applications(request):
     if (request.user.is_authenticated):
         
         if (request.user.account_type == 'Non-For-Profit Organization' ):
-            return render(request, 'my_applications.html')
+            
+            org = CustomUser.objects.get(pk=request.user.id)
+            
+            #
+            applications = GrantApplication.objects.all()
+            grant_list = Grant.objects.all()
+            
+            context = {'applications': applications, 'grant_list': grant_list}
+            
+            return render(request, 'my_applications.html', context)
         else: 
             # Try to remove after permissions are established
             return redirect('Home')
@@ -274,10 +285,18 @@ def nfp_donation(request):
         
         if (request.user.account_type == 'Non-For-Profit Organization' ):
             
+            org = CustomUser.objects.get(pk=request.user.id)
             
-   org = CustomUser.objects.get(pk=request.user.id)
+            # Get Grants Awarded
+            applications = GrantApplication.objects.all()
+            grant_list = Grant.objects.all()
+            people = CustomUser.objects.all()
             
-                     return render(request, 'nfp_donation.html')
+            dontations = Donation.objects.all()
+            nfps = Nfp.objects.all()
+            
+            context = {'applications': applications, 'grant_list': grant_list, 'donations': dontations, 'people': people, 'nfps': nfps}
+            return render(request, 'nfp_donation.html', context)
         else: 
             # Try to remove after permissions are established
             return redirect('Home')
@@ -288,9 +307,35 @@ def indv_donation(request):
     if (request.user.is_authenticated):
         
         if (request.user.account_type == 'Individual' ):
-            return render(request, 'indv_donation.html')
+            
+            curr_user = CustomUser.objects.get(pk=request.user.id)
+            
+            donations = Donation.objects.filter(user_id=curr_user)
+            nfps = Nfp.objects.all()
+            
+            context = {'donations' : donations, 'nfps': nfps}
+            return render(request, 'indv_donation.html', context)
         else: 
             # Try to remove after permissions are established
             return redirect('Home')
+    else: 
+        return redirect('Home')
+
+def make_donation(request):
+    model = Donation
+    if (request.user.is_authenticated):
+        
+        
+        if request.method == 'POST':
+            form = CreateDonation(request.POST)
+            if form.is_valid():
+                donation = form.save(commit=False)
+                donation.user = CustomUser.objects.get(pk=request.user.id)
+                donation.save()
+                messages.success(request, 'Donation Submitted')
+                #return redirect(request, "checkout.html")
+        else:
+            form = CreateDonation
+        return render(request, "make_donation.html", {'form': form})
     else: 
         return redirect('Home')

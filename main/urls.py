@@ -1,6 +1,6 @@
 # main/urls.py
 from django.contrib import admin
-from django.urls import path 
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
@@ -20,5 +20,6 @@ urlpatterns = [
     path('my_applications', views.my_applications, name="my_applications"),
     path('nfp_donation', views.nfp_donation, name="nfp_donation"),
     path('indv_donation', views.indv_donation, name="indv_donation"),
-    path('update_application_status/<int:app_id>/', views.update_application_status, name='update_application_status')
+    path('make_donation', views.make_donation, name="Make Donation"),
+    re_path(r'^update_application_status/(?P<app_id>[0-9a-f-]+)/$', views.update_application_status, name='update_application_status')
 ]

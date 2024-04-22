@@ -8,5 +8,14 @@
 
 <h2> My Applications</h2>
 
+{% for apps in applications %}
+    {% if apps.nfp_id == request.user.id %}
+            {% for grants in grant_list %}
+                {% if apps.grant_id == grants.grant_id %}
+                <p>{{grants.grant_name}} is {{apps.current_status}} as of {{apps.status_changed}}<p>
+                {% endif %}
+            {% endfor %}
+    {% endif %}
+{% endfor %}
 
 {% endblock %}

@@ -125,47 +125,42 @@
     </div>
   </section>
   {% for grants in my_grants %}
-  <h3>{{ grants.grant_name }}</h3>
+    <h3>{{ grants.grant_name }}</h3>
     {% for apps in applications %}
-        {% if apps.current_status == 'Pending' %}
-            {% if grants.grant_id == apps.grant_id %}
-            {% for orgs in nfp %}
-                {% if orgs.user_id == apps.nfp_id %}
-    
+      {% if apps.current_status == 'Pending' and grants.grant_id == apps.grant_id %}
+        {% for orgs in nfp %}
+          {% if orgs.user_id == apps.nfp_id %}
             <div class="album py-3 bg-body-tertiary">
-                <div class="container">
+              <div class="container">
                 <div class="row row-cols-md-3 g-3">
-                    <div class="col">
+                  <div class="col">
                     <div class="card shadow-sm">
-                        <div class="card-body">
+                      <div class="card-body">
                         <h4 class="card-header">{{orgs.org_name}}</h4>
                         <p class="card-text">{{apps.body}}</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
-                                <!-- Change status -->
-                                <form method="post" action="{% url 'update_application_status' application.app_id %}">
-                                  {% csrf_token %}
-                                  <input type="submit" name="accept" value="Accept">
-                                  <input type="submit" name="reject" value="Reject">
-                                </form>
-                            <button class="btn btn-sm btn-outline-secondary">Accept</button>
-                            <button type="button" class="btn btn-sm btn-outline-secondary">Reject</button>
-                            </div>
+                          <!-- <div class="btn-group"> -->
+                              <!-- Change status -->
+                              <form method="post" action="{% url 'update_application_status' apps.app_id %}">
+                                {% csrf_token %}
+                                <input type="submit" name="accept" value="Accept">
+                                <input type="submit" name="reject" value="Reject">
+                              </form>
+                          <!-- <button class="btn btn-sm btn-outline-secondary">Accept</button>
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Reject</button>
+                          </div> -->
                         </div>
-                        </div>
+                      </div>
                     </div>
-                    </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             </div>
-                {% endif %}
-            {% endfor %}
-            {% endif%}
-        {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
     {% endfor %}
-{% endfor %}
-    
-
+  {% endfor %}
 </main>
 
 <footer class="text-body-secondary py-5">

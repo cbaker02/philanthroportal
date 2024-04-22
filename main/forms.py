@@ -4,7 +4,7 @@ from django.forms import TextInput,EmailInput, ModelForm
 from phonenumber_field.formfields import PhoneNumberField
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import CustomUser, Nfp, Corporation, Grant, GrantApplication
+from .models import CustomUser, Nfp, Corporation, Grant, GrantApplication, Donation
 
 class ContactForm(forms.Form):
     your_name = forms.CharField(label='Full Name', widget=forms.TextInput(attrs={'placeholder': 'Jane Doe', 'class':'form-control'}), max_length=100, required=True)
@@ -81,3 +81,11 @@ class UpdateGrantApplicationStatus(forms.ModelForm):
         model = GrantApplication
         fields = ['current_status']
         widgets = {'current_status' : forms.ChoiceField(choices=GrantApplication.STATUS)}
+
+class CreateDonation(forms.ModelForm):
+    class Meta:
+        model = Donation
+        fields =  ['nfp', 'amount']
+        widgets = {
+            'amount' : forms.TextInput(attrs={'class': 'form-control'}),
+        }

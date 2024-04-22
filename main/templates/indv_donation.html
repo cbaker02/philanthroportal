@@ -7,6 +7,12 @@
 -->
 
 <h2> My Donation History</h2>
-
+{% for d in donations%}
+{% for n in nfps %}
+    {% if d.nfp_id == n.id %}
+    <p>You donated {{d.amount}} to {{n.org_name}} on {{d.date_created}}</p>
+    {% endif %}
+{% endfor %}
+{% endfor %}
 
 {% endblock %}
