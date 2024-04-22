@@ -79,20 +79,6 @@ class CreateGrantApplication(ModelForm):
             'current_status' : forms.HiddenInput(),
         }
         
-class UpdateGrantApplicationStatus(forms.ModelForm):
-    class Meta:
-        model = GrantApplication
-        fields = ['current_status']
-        widgets = {'current_status' : forms.ChoiceField(choices=GrantApplication.STATUS)}
-
-class CreateDonation(forms.ModelForm):
-    class Meta:
-        model = Donation
-        fields =  ['nfp', 'amount']
-        widgets = {
-            'amount' : forms.TextInput(attrs={'class': 'form-control'}),
-        }
-        
 class UpdateNFPForm(forms.ModelForm):
     address = forms.CharField(label='Address', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)
     address2 = forms.CharField(max_length=200, label='Address 2', widget=forms.TextInput(attrs={'class': 'form-control'}),required=False)
@@ -118,3 +104,17 @@ class UpdateCorporationForm(forms.ModelForm):
     class Meta:
         model = Corporation
         fields = ['address', 'address2', 'city', 'state', 'zipCode', 'bio']
+                
+class UpdateGrantApplicationStatus(forms.ModelForm):
+    class Meta:
+        model = GrantApplication
+        fields = ['current_status']
+        widgets = {'current_status' : forms.ChoiceField(choices=GrantApplication.STATUS)}
+
+class CreateDonation(forms.ModelForm):
+    class Meta:
+        model = Donation
+        fields =  ['nfp', 'amount']
+        widgets = {
+            'amount' : forms.TextInput(attrs={'class': 'form-control'}),
+        }

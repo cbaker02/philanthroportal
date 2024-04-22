@@ -25,6 +25,9 @@
       </a></li>
       <li><a href="{% url 'Home' %}">Home</a></li>
       <li><a href="{% url 'NFPs' %}">NFPs</a></li>
+      <!-- don't need this page any more lmao
+      <li><a href="{% url 'Contact Us' %}">Contact Us</a></li>
+      -->
       {% if user.is_authenticated %}
 
             {% if request.user.account_type == "Corporation" %}

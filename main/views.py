@@ -90,7 +90,7 @@ def registerPage(request):
                 else:
                     account= authenticate(request, email=email,password=password)
                     login(request,account)
-                    return redirect ('Home')
+                    return redirect ('users-profile')
         
         context = {'form': form}
         return render(request, 'register.html', context)
@@ -119,7 +119,7 @@ def nfpRegister(request):
 
                 if user is not None:
                     login(request,user)
-                    return redirect ('NFPs')
+                    return redirect ('users-profile')
                 else:
                     return redirect('Home')
             
@@ -153,7 +153,7 @@ def corpRegister(request):
             
                 if user is not None:
                     login(request,user)
-                    return redirect ('NFPs')
+                    return redirect ('users-profile')
                 else:
                     return redirect('Home')
         
@@ -356,7 +356,7 @@ def make_donation(request):
         return render(request, "make_donation.html", {'form': form})
     else: 
         return redirect('Home')
-    
+
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name='change_password.html'
     success_message= "Successfully Changed your Password"
