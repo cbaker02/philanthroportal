@@ -6,6 +6,8 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
 from django.utils.translation import gettext_lazy as _
+from django_resized import ResizedImageField
+from PIL import Image
 import uuid
 
 # Create your models here.
@@ -47,7 +49,7 @@ class CustomUser(AbstractUser):
     name = models.CharField(max_length=200, null=True)
     phone = PhoneNumberField(blank=True, default='(000)000-000', null=False)
 
-    profile_image = models.ImageField(null=True)
+    profile_image = ResizedImageField(size=[40,40],null=False, default="default.jpg")
     ACCT_TYPE = (('Non-For-Profit Organization', 'Non-For-Profit Organization'), ('Individual', 'Individual'), ('Corporation', 'Corporation'))
     account_type = models.CharField(max_length = 200, choices = ACCT_TYPE, default = 'Individual')
 

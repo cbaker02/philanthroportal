@@ -10,6 +10,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from datetime import datetime
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 # Create your views here.
 
 # NOTE: When adding a new view/template, make sure to add it to main/urls.py
@@ -17,7 +20,21 @@ from datetime import datetime
 # views in main/urls.py are referenced by philanthroportal/urls.py automatically
 
 def home(request):
-    return render(request, "home.html")
+    if request.method == 'GET':
+        form = ContactForm()
+    else:
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            subject = form.cleaned_data['subject']
+            from_email = form.cleaned_data['from_email']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(subject, message, from_email, ['admin@example.com'])
+                
+            except BadHeaderError:
+                return HttpResponse('Invalid header found.')
+            return redirect('success')
+    return render(request, "home.html", {'form': form})
 
 def nfps(request):
     nfps_list = Nfp.objects.all()
@@ -339,3 +356,50 @@ def make_donation(request):
         return render(request, "make_donation.html", {'form': form})
     else: 
         return redirect('Home')
+    
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name='change_password.html'
+    success_message= "Successfully Changed your Password"
+    success_url=reverse_lazy('home')
+    
+@login_required 
+def profile(request):
+    context = {}
+    nfp_form = None
+    corp_form = None
+    if request.method == 'POST':
+        user_form= CustomUserChangeForm(request.POST, instance=request.user)
+
+        if request.user.account_type == 'Individual':
+            if user_form.is_valid():
+                user_form.save()
+                messages.success(request, 'Your profile is updated successfully')
+                return redirect(to='users-profile')
+        elif request.user.account_type == 'Non-For-Profit Organization':
+            nfp_form= UpdateNFPForm(request.POST, instance=request.user.nfp)
+            if nfp_form.is_valid() and user_form.is_valid():
+                user_form.save()
+                nfp_form.save()
+                messages.success(request, 'Your profile is updated successfully')
+                return redirect(to='users-profile')
+        elif request.user.account_type == 'Corporation':
+            corp_form=UpdateCorporationForm(request.POST, instance=request.user.corporation)
+            if user_form.is_valid() and corp_form.is_valid():
+                user_form.save()
+                corp_form.save()
+                messages.success(request, 'Your profile is updated successfully')
+                return redirect(to='users-profile')
+    else:
+        user_form= CustomUserChangeForm(instance=request.user)
+        if request.user.account_type == 'Non-For-Profit Organization':
+            nfp_form= UpdateNFPForm(instance=request.user.nfp)
+        elif request.user.account_type == 'Corporation':
+            corp_form=UpdateCorporationForm(instance=request.user.corporation)
+        
+    
+    context.update({
+        'user_form': user_form,
+        'nfp_form': nfp_form, 
+        'corp_form': corp_form})
+
+    return render(request, 'profile.html', context)

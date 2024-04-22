@@ -1,5 +1,122 @@
+/*establishes background color for all pages, padding that words with nav bar, and color for text*/
 body{
-    background-color: #ebeff5;
+    padding-top: 65px;
+    background-color: #fff;
+    color: #36151E;
+}
+
+/*message cards*/
+.user_card {
+	width: auto;
+	margin-top: auto;
+	margin-bottom: auto;
+	/* Change to match company colors */
+	background: #fff;
+	position: static;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 15px;
+	box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+	-webkit-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+	-moz-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+	border-radius: 5px;
+}
+
+.p1{
+    color: #36151E;
+    font-family:"Times New Roman", Times, serif ;
+
+}
+
+h3{
+    color: #36151E;
+    /*font info, place all other css above this or it wont work*/
+    font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #417B5A;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  footer {
+    width:100%;
+    text-align: left;
+    border-radius: 5px;
+    bottom:0;
+    position:static;
+    padding: 20px;
+    background-color: #D0CEBA;
+    color: #36151E;
+    font-family:"Times New Roman", Times, serif ;
+  }
+  
+li {
+    float: left;
+  }
+
+li a{
+    display: block;
+    color: #fff;
+    text-align: center;
+    padding: 14px 16px;
+    /*font info, place all other css above this or it wont work*/
+    font-family: "League Gothic", sans-serif;
+    font-size: x-large;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+
+li a:hover {
+    color:#fff;
+    background-color: #36674b;
+  }
+  
+  input, select, textarea {
+	width: 100%;
+  padding: 12px;
+  border: 1 px solid #36151E;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top:6px;
+  margin-bottom: 16px;
+  resize:vertical;
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+}
+
+button[type=submit] {
+  background-color: #417B5A;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+}
+
+button[type=submit]:hover {
+  background-color: #36674b;
 }
 
 .hello-msg{

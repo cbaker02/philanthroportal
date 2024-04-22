@@ -1,3 +1,4 @@
+
 {% load static %}
 
 <!DOCTYPE html>
@@ -10,81 +11,58 @@
         Django App
       {% endblock %}
     </title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"  rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic:wdth@75..100&display=swap" rel="stylesheet">
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="http://127.0.0.1:8000/">
-        <img src="{% static 'images/Philanthroportal-logos_transparent.png' %}" width = auto height = 50>
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'Home' %}">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'NFPs' %}">NFPs</a>
-          </li>
-
-          {% if user.is_authenticated %}
+    <ul>
+      <li><a href="{% url 'Home' %}">
+        <img src="{% static 'images/Philanthroportal-logos_white.png' %}" width=130px height=40px>
+      </a></li>
+      <li><a href="{% url 'Home' %}">Home</a></li>
+      <li><a href="{% url 'NFPs' %}">NFPs</a></li>
+      {% if user.is_authenticated %}
 
             {% if request.user.account_type == "Corporation" %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'Create Grant' %}">Create Grant</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'my_grants' %}">My Grants</a>
-              </li>
+            <li><a href="{% url 'Create Grant' %}">Create Grant</a></li>
+            <li><a href="{% url 'my_grants' %}">My Grants</a></li>
             {% endif %}
 
             {% if request.user.account_type == "Non-For-Profit Organization" %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'grant_list' %}"> Grants </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'my_applications' %}"> My Applications </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'nfp_donation' %}"> Donation History </a>
-              </li>
+              <li><a href="{% url 'grant_list' %}">Grants</a></li>
+              <li><a href="{% url 'my_applications' %}">My Applications</a></li>
+              <li><a href="{% url 'nfp_donation' %}">Donation History</a></li>
             {% endif %}
 
             {% if request.user.account_type == "Individual" %}
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'indv_donation' %}"> Donation History </a>
-            </li>
+            <li><a href="{% url 'indv_donation' %}">Donation History</a></li>
             {% endif %}
-
           {% endif %}
-
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'Contact Us' %}">Contact Us</a>
-          </li>
-        </ul>
-      </div>
-
-      <!--Logout button-->
-      <span class="hello-msg" style="font-size: 18px; margin-right: 20px">
-        {% if request.user.is_authenticated %}
-          Hello, {{request.user.name}}
-        {% endif %}
-      </span>
-      <span class="hello-msg" style="font-size: 18px; margin-right: 20px"><a href="{% url 'logout' %}">
+      {% if not request.user.is_authenticated %}
+        <li style="float:right"><a href="{% url 'register' %}">Sign-up</a></li>
+      {% endif %}
+      
+      {% if request.user.is_authenticated %}
+      <!--
+      <li style="float:right"><img class="rounded-circle account-img" src="{{user.profile_image.url}}" width = height = 20px>-->
+      <li style="float:right"><a href="{% url 'users-profile' %}">Hello, {{request.user.name}}</a></li>
+      {% endif %}
+    
+      <li style="float:right"><a href="{% url 'logout' %}">
         {% if request.user.is_authenticated %}
           Logout
         {% else %}
           Login
         {% endif %}
-      </a></span>
+      </a></li>
+    </ul>
 
-    </nav>
-
-    <div class="container">
-      <br>
-      {% block content %} {% endblock %}
-    </div>
+    {% block content %} {% endblock %}
+    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" ></script>
   </body>

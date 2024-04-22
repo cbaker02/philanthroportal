@@ -3,8 +3,10 @@ html {
 	margin: 0;
 	padding: 0;
 	height: 100%;
+	color: #36151E;
+    font-family:"Times New Roman", Times, serif ;
 	/* Change to match company colors */
-	background: #ebeff5 !important;
+	background: #417B5A !important;
 }
 .user_card {
 	width: 350px;
@@ -17,11 +19,22 @@ html {
 	justify-content: center;
 	flex-direction: column;
 	padding: 10px;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	box-shadow: 0 4px 8px 0 #5065A8, 0 6px 20px 0 #5065A8;
+	-webkit-box-shadow: 0 4px 8px 0 #5065A8, 0 6px 20px 0 #5065A8;
+	-moz-box-shadow: 0 4px 8px 0 #5065A8, 0 6px 20px 0 #5065A8;
 	border-radius: 5px;
 
+}
+
+h3{
+    color: #36151E;
+    /*font info, place all other css above this or it wont work*/
+    font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
 }
 
 .form_container {
@@ -35,6 +48,12 @@ html {
 	width: 100%;
 	background: #5065A8 !important;
 	color: white !important;
+	font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
 }
 .login_btn:focus {
 	box-shadow: none !important;

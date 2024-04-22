@@ -2,6 +2,10 @@
 from django.contrib import admin
 from django.urls import path, re_path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+from main.views import ChangePasswordView
+
 
 urlpatterns = [
     path("", views.home, name="Home"),
@@ -21,5 +25,7 @@ urlpatterns = [
     path('nfp_donation', views.nfp_donation, name="nfp_donation"),
     path('indv_donation', views.indv_donation, name="indv_donation"),
     path('make_donation', views.make_donation, name="Make Donation"),
+    path('profile/', views.profile, name="users-profile"),
+    path('password-change/', ChangePasswordView.as_view(),name="password_change"),
     re_path(r'^update_application_status/(?P<app_id>[0-9a-f-]+)/$', views.update_application_status, name='update_application_status')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
