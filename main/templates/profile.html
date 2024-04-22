@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block title %}Profile Page{% endblock title %}
 {% block content %}
+
     <div class="row my-3 p-3">
         <img class="rounded-circle account-img" src="{{user.profile_image.url }} " style="cursor: pointer;" />
         <h1>Profile page for {{user.name}}</h1>
@@ -23,19 +24,21 @@
             <div class="form-row">
                 <div class="col-md-5">
                     <div class="form-group">
+                        <label class="small mb-1">Change Profile Picture:</label>
+                        {{user_form.profile_image}}       
+                    
                         <label class="small mb-1">Email:</label>
                         {{user.email}}
                     </div>
                     <div class="form-group">
                         <label class="small mb-1">Phone Number:</label>
                         {{user_form.phone}}
+                        <li>Enter phone number as (xxx)-xxx-xxxx</li>
                     </div>
+                </br>
                     <div class="form-group">
                         <a href="{% url 'password_change' %}">Change Password</a>
                         <hr>
-                        <label class="small mb-1">Change Profile Picture:</label>
-                        {{user_form.profile_image}}       
-                    </div>
 
                     {% if user.account_type == 'Non-For-Profit Organization' %} 
                     <div class="form-group">

@@ -360,7 +360,7 @@ def make_donation(request):
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name='change_password.html'
     success_message= "Successfully Changed your Password"
-    success_url=reverse_lazy('home')
+    success_url=reverse_lazy('Home')
     
 @login_required 
 def profile(request):
