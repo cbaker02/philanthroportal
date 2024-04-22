@@ -3,6 +3,8 @@ from django import forms
 from django.forms import TextInput,EmailInput, ModelForm
 from phonenumber_field.formfields import PhoneNumberField
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django_resized import ResizedImageField
+
 
 from .models import CustomUser, Nfp, Corporation, Grant, GrantApplication, Donation
 
@@ -54,7 +56,7 @@ class corpCreationForm(forms.Form):
 class CustomUserChangeForm(UserChangeForm):
     #email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     phone = PhoneNumberField(region="US", label='Phone Number',required=False)
-    profile_image= forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}), required=False)
+    profile_image = ResizedImageField(size=[40,40],null=False, default="default.jpg")
     class Meta:
         model = CustomUser
         fields = ['phone','profile_image']
