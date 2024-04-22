@@ -19,5 +19,6 @@ urlpatterns = [
     path('my_grants', views.my_grants, name="my_grants"),
     path('my_applications', views.my_applications, name="my_applications"),
     path('nfp_donation', views.nfp_donation, name="nfp_donation"),
-    path('indv_donation', views.indv_donation, name="indv_donation")
+    path('indv_donation', views.indv_donation, name="indv_donation"),
+    path('update_application_status/<int:app_id>/', views.update_application_status, name='update_application_status')
 ]

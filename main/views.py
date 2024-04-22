@@ -238,6 +238,26 @@ def my_grants(request):
     else: 
         return redirect('Home')
     
+def update_application_status(request, app_id):
+    if (request.user.is_authenticated):
+        if (request.user.account_type == 'Corporation' ):
+            if request.method == 'POST':
+                application = GrantApplication.objects.get(pk=app_id)
+                if 'accept' in request.POST:
+                    application.current_status = 'Accepted'
+                elif 'reject' in request.POST:
+                    application.current_status = 'Rejected'
+                application.save()
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+            else:
+                grants = GrantApplication.objects.all()
+                context = {'': }
+                return render(request, 'my_grants.html', context)
+        else:
+            return redirect('Home')
+    else:
+        return redirect('Home')
+    
 def my_applications(request):
     if (request.user.is_authenticated):
         
@@ -253,7 +273,11 @@ def nfp_donation(request):
     if (request.user.is_authenticated):
         
         if (request.user.account_type == 'Non-For-Profit Organization' ):
-            return render(request, 'nfp_donation.html')
+            
+            
+   org = CustomUser.objects.get(pk=request.user.id)
+            
+                     return render(request, 'nfp_donation.html')
         else: 
             # Try to remove after permissions are established
             return redirect('Home')

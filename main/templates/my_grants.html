@@ -143,6 +143,11 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <!-- Change status -->
+                                <form method="post" action="{% url 'update_application_status' application.app_id %}">
+                                  {% csrf_token %}
+                                  <input type="submit" name="accept" value="Accept">
+                                  <input type="submit" name="reject" value="Reject">
+                                </form>
                             <button class="btn btn-sm btn-outline-secondary">Accept</button>
                             <button type="button" class="btn btn-sm btn-outline-secondary">Reject</button>
                             </div>
