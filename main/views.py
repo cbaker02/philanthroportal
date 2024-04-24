@@ -355,7 +355,7 @@ def make_donation(request):
             form = CreateDonation
         return render(request, "make_donation.html", {'form': form})
     else: 
-        return redirect('Home')
+        return redirect('register')
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name='change_password.html'

@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 {% block title %}Profile Page{% endblock title %}
 {% block content %}
+<div style="padding-left:30px;">
 
-    <div class="row my-3 p-3">
-        <img class="rounded-circle account-img" src="{{user.profile_image.url }} " style="cursor: pointer;" />
+    <div class="container">
+        <div class="image">
+        <img class="rounded-circle account-img" src="{{user.profile_image.url }} " />
+        </div>
+        <div class="text">
         <h1>Profile page for {{user.name}}</h1>
+        </div>
     </div>
+
     {% if user_form.errors %}
         <div class="alert alert-danger alert-dismissible" role="alert">
             <div id = "form_errors">
@@ -18,96 +24,100 @@
             </button>
         </div>
     {% endif %}
-    <div class="form-content">
+    <div class="container">
+    <div class="form_content">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="form-row">
-                <div class="col-md-5">
-                    <div class="form-group">
-                        <label class="small mb-1">Change Profile Picture:</label>
+        </br>
+                    <div class="input">
+                        <label class="input">Change Profile Picture:</label>
                         {{user_form.profile_image}}       
                     
-                        <label class="small mb-1">Email:</label>
-                        {{user.email}}
+                        <label class="input">Email:</label>
+                        <h4>{{user.email}}</h4>
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Phone Number:</label>
+                    <div class="input">
+                        <label class="input">Phone Number:</label>
                         {{user_form.phone}}
-                        <li>Enter phone number as (xxx)-xxx-xxxx</li>
+                        <li class="numbers">Enter phone number as (xxx)-xxx-xxxx</li>
                     </div>
                 </br>
-                    <div class="form-group">
+                </br>
+                    <div class="input">
                         <a href="{% url 'password_change' %}">Change Password</a>
                         <hr>
-
-                    {% if user.account_type == 'Non-For-Profit Organization' %} 
-                    <div class="form-group">
-                        <label class="small mb-1">Non-For-Profit Name:</label>
-                        {{user.nfp.org_name}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Addresss:</label>
+                    {% if user.account_type == 'Non-For-Profit Organization' %} 
+                    <div class="input">
+                        <label class="input">Non-For-Profit Name:</label>
+                        <h4>{{user.nfp.org_name}}</h4>
+                    </div>
+                    <div class="input">
+                        <label class="input">Addresss:</label>
                         {{nfp_form.address}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Addresss2:</label>
+                    <div class="input">
+                        <label class="input">Addresss2:</label>
                         {{nfp_form.address2}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">City:</label>
+                    <div class="input">
+                        <label class="input">City:</label>
                         {{nfp_form.city}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">State:</label>
+                    <div class="input">
+                        <label class="input">State:</label>
                         {{nfp_form.state}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Zip Code:</label>
+                    <div class="input">
+                        <label class="input">Zip Code:</label>
                         {{nfp_form.zipCode}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Desired Donation Items:</label>
+                    <div class="input">
+                        <label class="input">Desired Donation Items:</label>
                         {{nfp_form.items}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Bio:</label>
+                    <div class="input">
+                        <label class="input">Bio:</label>
                         {{nfp_form.bio}}
                     </div>
                     {%endif%} 
                       
                     {% if user.account_type == 'Corporation' %} 
-                    <div class="form-group">
-                        <label class="small mb-1">Corporation Name:</label>
-                        {{user.corporation.corp_name}}
+                    <div class="input">
+                        <label class="input">Corporation Name:</label>
+                        <h4>{{user.corporation.corp_name}}</h4>
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Addresss:</label>
+                    <div class="input">
+                        <label class="input">Addresss:</label>
                         {{corp_form.address}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Addresss2:</label>
+                    <div class="input">
+                        <label class="input">Addresss2:</label>
                         {{corp_form.address2}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">City:</label>
+                    <div class="input">
+                        <label class="input">City:</label>
                         {{corp_form.city}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">State:</label>
+                    <div class="input">
+                        <label class="input">State:</label>
                         {{corp_form.state}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Zip Code:</label>
+                    <div class="input">
+                        <label class="input">Zip Code:</label>
                         {{corp_form.zipCode}}
                     </div>
-                    <div class="form-group">
-                        <label class="small mb-1">Bio:</label>
+                    <div class="input">
+                        <label class="input">Bio:</label>
                         {{corp_form.bio}}
                     </div>
                     {%endif%}         
-            <br><br>
+            <br>
             <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>    
             <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+            <br>
         </form>
     </div>
+</div>
+</div>
 {% endblock content %}

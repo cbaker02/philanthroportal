@@ -50,8 +50,7 @@
       {% endif %}
       
       {% if request.user.is_authenticated %}
-      <!--
-      <li style="float:right"><img class="rounded-circle account-img" src="{{user.profile_image.url}}" width = height = 20px>-->
+     <!-- <li style="float:right"><img class="rounded-circle account-img" src="{{user.profile_image.url}}" width = height = 20px>-->
       <li style="float:right"><a href="{% url 'users-profile' %}">Hello, {{request.user.name}}</a></li>
       {% endif %}
     
