@@ -49,7 +49,7 @@ class CustomUser(AbstractUser):
     name = models.CharField(max_length=200, null=True)
     phone = PhoneNumberField(blank=True, default='(000)000-000', null=False)
 
-    profile_image = ResizedImageField(size=[40,40],null=False, default="default.jpg")
+    profile_image = ResizedImageField(size=[40,40],null=False, default="default.jpg", upload_to='pfps')
     ACCT_TYPE = (('Non-For-Profit Organization', 'Non-For-Profit Organization'), ('Individual', 'Individual'), ('Corporation', 'Corporation'))
     account_type = models.CharField(max_length = 200, choices = ACCT_TYPE, default = 'Individual')
 
