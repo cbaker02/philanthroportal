@@ -6,6 +6,15 @@
 <div style="padding-top:20px;">
     <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
+                <div class="d-flex justify-content-center">
+                    <img src="/static/images/Philanthroportal-logos_transparent.png" class="img-fluid logo">
+                </div>
+        </div>
+    </div>
+</div>
+<div style="padding-top:20px;">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
             <div class="user_card">
                 <div class="d-flex justify-content-center">
                     <br>
@@ -21,6 +30,11 @@
         </div>
     </div>
     <br>
+    
+    <div class="container">          
+        <img src="/static/images/coin_earth.jpg" class="earth rounded">
+        <button type="donate" style="margin-left: 20px;">Donate Now!</button>
+    </div>
     <br>
     <div class="container h-400">
         <div class="d-flex justify-content-center h-400">
@@ -56,29 +70,42 @@
         </div>
     </div>
 </div>
-
-<footer style="margin-top:60px;">
+<div class="d-flex justify-content-center" style="padding-top:20px;">
+    <button type="nfps">Browse our Non-for-Profit Partners</button>
+</div>
+<div style="padding-top:20px;">
+    <div class="container h-100">
+        <div class="d-flex justify-content-center h-100">
+                <div class="d-flex justify-content-center">
+                    <img src="/static/images/heart_hands.jpg" class="img-fluid hands">
+                </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class=" container justify-content-center ">
     <form method="post">
         <h3> Contact Us </h3>
         {% csrf_token %}
         <label for="your_name">Your Name</label>
-        <div class="input">
+        <div class="input w-100"">
             {{form.your_name}}
         </div>
         <label for="from_email">Your Email</label>
-        <div class="input">
+        <div class="input w-100">
             {{form.from_email}}
         </div>
         <label for="subject">Subject</label>
-        <div class="input">
+        <div class="input w-100">
             {{form.subject}}
         </div>
         <label for="message">What would you like to say?</label>
-        <div class="input">
+        <div class="input w-100">
             {{form.message}}
         </div>
         <button type="submit">Submit</button>
       </form>
+    </div>
 </footer>
 </body>
 

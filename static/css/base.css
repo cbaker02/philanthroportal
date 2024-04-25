@@ -214,3 +214,63 @@ background-color: #36674b;
   font-size: 18px;
   margin-right: 20px;
 }
+
+.logo{
+  height: 200px;
+  width: auto;
+}
+.hands{
+  height: 250px;
+  width: auto;
+}
+
+.earth{
+  height: auto;
+  width: 400px;
+}
+
+button[type=donate] {
+  background-color: #417B5A;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 75px;
+  width: 150px;
+  font-size: xx-large;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+  }
+  
+button[type=donate]:hover {
+background-color: #36674b;
+}
+
+button[type=nfps] {
+  background-color:#5065A8;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 60px;
+  width: 350px;
+  font-size: x-large;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+  }
+  
+button[type=nfps]:hover {
+background-color: #455791;
+}
