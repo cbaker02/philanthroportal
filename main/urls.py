@@ -28,4 +28,4 @@ urlpatterns = [
     path('profile/', views.profile, name="users-profile"),
     path('password-change/', ChangePasswordView.as_view(),name="password_change"),
     re_path(r'^update_application_status/(?P<app_id>[0-9a-f-]+)/$', views.update_application_status, name='update_application_status')
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

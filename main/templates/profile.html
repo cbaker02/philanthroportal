@@ -28,11 +28,13 @@
     <div class="form_content">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            {{new_form.as_p}}
         </br>
                     <div class="input">
                         <label class="input">Change Profile Picture:</label>
-                        {{user_form.profile_image}}       
-                    
+                        {{user_form.profile_image}}      
+                    </div> 
+                    <div class="input">
                         <label class="input">Email:</label>
                         <h4>{{user.email}}</h4>
                     </div>

@@ -40,14 +40,16 @@
     </section>
     <div class="container">
       <div class="row">
-        {% for nfps in nfps_list %}
+        {% for user in nfps_list %}
+          {% if user.account_type == 'Non-For-Profit Organization' %}
         <div class="col-sm-6">
             <!-- Figure how to add image from user profile -->
-            <img src="{% static 'images/Philanthroportal-logos_transparent.png' %}" width= height=auto></img>
-              <h4 class="card-header butFont">{{nfps.org_name}}</h4>
-              <p class="card-text subsection">{{nfps.bio}}</p>
+              <img src="{{ user.profile_image.url}} " height=auto class="my-img rounded mx-auto d-block"/>
+              <h4 class="card-header butFont">{{user.nfp.org_name}}</h4>
+              <p class="card-text subsection">{{user.nfp.bio}}</p>
               <a href="{% url 'Make Donation' %}"><button type="donate">Donate</button></a>
         </div>
+          {% endif%}
         {% endfor %}
       </div>
   </div>

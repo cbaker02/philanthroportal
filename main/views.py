@@ -13,6 +13,8 @@ from datetime import datetime
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
+from django.core.files.storage import FileSystemStorage
+
 # Create your views here.
 
 # NOTE: When adding a new view/template, make sure to add it to main/urls.py
@@ -37,9 +39,9 @@ def home(request):
     return render(request, "home.html", {'form': form})
 
 def nfps(request):
-    nfps_list = Nfp.objects.all()
-
-    return render(request, "nfps.html", {'nfps_list': nfps_list})
+    nfps_list = CustomUser.objects.all()
+    
+    return render(request, "nfps.html", {'nfps_list': nfps_list, })
 
 def contactus(request):
     if request.method == 'GET':
@@ -368,7 +370,18 @@ def profile(request):
     nfp_form = None
     corp_form = None
     if request.method == 'POST':
-        user_form= CustomUserChangeForm(request.POST, instance=request.user)
+        user_form= CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+            
+        if 'imagechange' in request.POST and request.FILES['image']:
+            image = request.FILES['profile_image']
+            fs = FileSystemStorage()
+            image_fs = fs.save(image.name, image)
+            user_with_image = CustomUser.objects.get(user=request.user)
+            # get the old image path
+            old_image_path = user_with_image.image.path
+            #replace the image and save
+            user_with_image.image = image_fs
+            user_with_image.save()
 
         if request.user.account_type == 'Individual':
             if user_form.is_valid():

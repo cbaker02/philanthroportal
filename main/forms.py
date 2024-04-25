@@ -56,7 +56,7 @@ class corpCreationForm(forms.Form):
 class CustomUserChangeForm(UserChangeForm):
     #email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     phone = PhoneNumberField(region="US", label='Phone Number',required=False)
-    profile_image = ResizedImageField(size=[40,40],null=False, default="default.jpg")
+    #profile_image = ResizedImageField(size=[40,40], null=True, upload_to='photos/pfps')
     class Meta:
         model = CustomUser
         fields = ['phone','profile_image']
