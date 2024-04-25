@@ -115,12 +115,15 @@ ul {
 }
 
 footer {
-  width:100%;
+  position:static;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   margin-top: 20px;
   text-align: left;
   border-radius: 5px;
-  bottom:0;
-  position:static;
   padding: 20px;
+  z-index: 1;
   background-color: #D0CEBA;
   color: #36151E;
   font-family:"Times New Roman", Times, serif ;

@@ -42,7 +42,7 @@
       <div class="row">
         {% for user in nfps_list %}
           {% if user.account_type == 'Non-For-Profit Organization' %}
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <!-- Figure how to add image from user profile -->
               <img src="{{ user.profile_image.url}} " height=auto class="my-img rounded mx-auto d-block"/>
               <h4 class="card-header butFont">{{user.nfp.org_name}}</h4>
@@ -55,17 +55,10 @@
   </div>
 </main>
 
-<footer class="text-body-secondary py-5">
-  <div class="container">
-    <p class="float-end mb-1">
-      <a href="#">Back to top</a>
-    </p>
-  </div>
-</footer>
-<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+<div style="text-align:center;bottom:0px;">
+  <a href="#"><button type="donate">Back to top</button></a>
+</div>
 
-    </body>
+</body>
 </html>
-
-
 {% endblock %}
