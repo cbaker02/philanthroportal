@@ -69,7 +69,7 @@ button[type=register] {
       background-color: #455791;
     }
 
-    button[type=donate] {
+    button[type=nfp] {
         background-color: #417B5A;
         color: white;
         padding: 12px 20px;
@@ -86,7 +86,7 @@ button[type=register] {
           "wdth" 100;
         }
         
-    button[type=donate]:hover {
+    button[type=nfp]:hover {
     background-color: #36674b;
     }
 

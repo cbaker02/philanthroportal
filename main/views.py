@@ -202,7 +202,7 @@ def createGrant(request):
                     grant = form.save(commit=False)
                     grant.corp = CustomUser.objects.get(pk=request.user.id)
                     grant.save()
-                    messages.success(request, 'Grant created: ' + grant.grant_name)
+                    return redirect('my_grants')
             else:
                 form = CreateGrant
             return render(request, 'createGrant.html', {'form': form})

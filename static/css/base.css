@@ -25,21 +25,26 @@ box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
 border-radius: 5px;
 }
 
+.payment_card {
+  width: 50%;
+  margin: auto;
+  /* Change to match company colors */
+  background: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+  -webkit-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+  -moz-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+  border-radius: 5px;
+  }
+
 .p1{
   color: #36151E;
   font-family:"Times New Roman", Times, serif ;
 
-}
-
-h3{
-  color: #36151E;
-  /*font info, place all other css above this or it wont work*/
-  font-family: "League Gothic", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-  "wdth" 100;
 }
 
 .container {
@@ -79,7 +84,42 @@ label{
   color: #36151E;
   font-family:"Times New Roman", Times, serif ;
 }
+
+.table {
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+  font-size: 20px;
+}
+
+
+.form-label{
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+}
+
 h1{
+  color: #36151E;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+}
+
+h2{
+  color: #36151E;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+}
+
+h3{
   color: #36151E;
   /*font info, place all other css above this or it wont work*/
   font-family: "League Gothic", sans-serif;

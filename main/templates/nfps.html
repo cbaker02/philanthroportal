@@ -47,7 +47,7 @@
               <img src="{{ user.profile_image.url}} " height=auto class="my-img rounded mx-auto d-block"/>
               <h4 class="card-header butFont">{{user.nfp.org_name}}</h4>
               <p class="card-text subsection">{{user.nfp.bio}}</p>
-              <a href="{% url 'Make Donation' %}"><button type="donate">Donate</button></a>
+              <a href="{% url 'Make Donation' %}"><button type="nfp">Donate</button></a>
         </div>
           {% endif%}
         {% endfor %}
@@ -56,7 +56,7 @@
 </main>
 
 <div style="text-align:center;bottom:0px;">
-  <a href="#"><button type="donate">Back to top</button></a>
+  <a href="#"><button type="nfp">Back to top</button></a>
 </div>
 
 </body>

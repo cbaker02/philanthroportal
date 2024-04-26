@@ -1,18 +1,47 @@
 {% extends "base.html" %} {% block title %} Individual Donation {% endblock %}
 {% block content %}
+{% load static %}
 
 <!-- 
     Functional Requirements:
         View your own Donation History
 -->
 
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/indv_donation.css' %}" />
+</head>
+
 <h2> My Donation History</h2>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Non-for-Profit</th>
+        <th scope="col">Donation Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+
+<tbody>
 {% for d in donations%}
-{% for n in nfps %}
-    {% if d.nfp_id == n.id %}
-    <p>You donated {{d.amount}} to {{n.org_name}} on {{d.date_created}}</p>
-    {% endif %}
+    {% for n in nfps %}
+        {% if d.nfp_id == n.id %}
+        <th scope="row"></th>
+        <td>
+            {{n.org_name}}
+        </td>
+        <td>
+            {{d.amount}}
+        </td>
+        <td">
+            {{d.date_created}}
+        </td>
+        {% endif %}
+
+    
+    {% endfor %}
 {% endfor %}
-{% endfor %}
+</tbody>
+</table>
 
 {% endblock %}

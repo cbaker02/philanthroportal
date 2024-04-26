@@ -62,15 +62,14 @@ class CustomUserChangeForm(UserChangeForm):
         fields = ['phone','profile_image']
         
 class CreateGrant(ModelForm):
+    grant_name = forms.CharField(label='Grant Name', widget=forms.TextInput(attrs={'placeholder': 'Giving for Good', 'class': 'form-control'}))
+    amount = forms.CharField(label='Amount', widget=forms.TextInput(attrs={'placeholder': '$500,000', 'class': 'form-control'}))
+    description = forms.CharField(label='Description', widget=forms.Textarea(attrs={'class': 'form-control'}))
+    due_date = forms.DateField(label='Due Date', widget=forms.DateInput(attrs={'format': 'yyyy-mm-dd','type':'date'}))
+    
     class Meta:
         model = Grant
         fields =  ['grant_name', 'amount', 'description', 'due_date']
-        widgets = {
-            'grant_name' : forms.TextInput(attrs={'class': 'form-control'}),
-            'amount' : forms.TextInput(attrs={'class': 'form-control'}),
-            'description' : forms.Textarea(attrs={'class': 'form-control'}),
-            'due_date': forms.DateInput(attrs={'format': 'yyyy-mm-dd','type':'date'}),
-        }
       
 class CreateGrantApplication(ModelForm):
     class Meta:
