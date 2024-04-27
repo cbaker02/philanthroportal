@@ -72,6 +72,8 @@ class CreateGrant(ModelForm):
         fields =  ['grant_name', 'amount', 'description', 'due_date']
       
 class CreateGrantApplication(ModelForm):
+    body = forms.CharField(label='body', widget=forms.Textarea(attrs={'placeholder': 'Our organization will use this grant to help make the world a better place.', 'class': 'form-control'}))
+  
     class Meta:
         model = GrantApplication
         fields =  ['grant', 'body', 'current_status']
@@ -79,6 +81,7 @@ class CreateGrantApplication(ModelForm):
             'body' : forms.Textarea(attrs={'class': 'form-control'}),
             'current_status' : forms.HiddenInput(),
         }
+        
         
 class UpdateNFPForm(forms.ModelForm):
     address = forms.CharField(label='Address', max_length=200, widget=forms.TextInput(attrs={'class': 'form-control'}), required=False)

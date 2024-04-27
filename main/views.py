@@ -224,9 +224,10 @@ def grantApplication(request):
                 if form.is_valid():
                     grant_application = form.save(commit=False)
                     grant_application.nfp = CustomUser.objects.get(pk=request.user.id)
+                    #grant_application.current_status = 'Pending'
                     grant_application.save()
-                    messages.success(request, 'Application Submitted')
-                    #return redirect(request, "grants.html", {'grant_list': grant_list})
+                    #messages.success(request, 'Application Submitted')
+                    return redirect('my_applications')
             else:
                 form = CreateGrantApplication
             return render(request, "grant_application.html", {'form': form})
