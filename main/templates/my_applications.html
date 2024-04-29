@@ -1,33 +1,36 @@
 {% extends "base.html" %} {% block title %} My Applications {% endblock %}
 {% block content %}
-
+{% load static %}
 <!-- 
     Functional Requirements:
         View Grant History & Applicants
 -->
 
-<section class="text-center">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1>My Applications</h1>
-        {% if apps %}
-            <p class="p1">It looks like you don't have any grant applications.</p>
-        {% endif %}
-        <p>
-      </div>
-    </div>
-</section>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/indv_donation.css' %}" />
+</head>
 
-
-<div class="col-md">
-    <div class="card card-body">
-            <table class="table">
-                <tr>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Date Changed</th>
-                </tr>
-                
+<div class ="container-fluid d-flex justify-content-center">
+    <h2> My Applications</h2>
+</div>
+<br>
+<div class ="container-fluid">
+    <table class="table table-striped border">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date Changed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if applications.count == 0 %}
+            <tr>
+                <td>No applications to display</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endif %} 
                 {% for apps in applications %}
                     {% if apps.nfp_id == request.user.id %}
                        {% for grants in grant_list %}
@@ -41,8 +44,8 @@
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
-            </table>
-    </div>
+        </tbody>
+    </table>
 </div>
 
 {% endblock %}

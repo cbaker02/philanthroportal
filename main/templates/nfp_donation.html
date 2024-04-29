@@ -57,13 +57,6 @@
           </tr>
       </thead>
       <tbody>
-      {% if donations.count == 0 %}
-      <tr>
-        <td>No donations to display</td>
-        <td></td>
-        <td></td>
-      </tr>
-      {% endif %}
       {% for dons in donations %}
         {% for n in nfps %}
           {% if dons.nfp_id == n.id %}

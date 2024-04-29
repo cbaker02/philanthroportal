@@ -288,7 +288,7 @@ def my_applications(request):
             org = CustomUser.objects.get(pk=request.user.id)
             
             #
-            applications = GrantApplication.objects.all()
+            applications = GrantApplication.objects.filter(nfp_id=org)
             grant_list = Grant.objects.all()
             
             context = {'applications': applications, 'grant_list': grant_list}

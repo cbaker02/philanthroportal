@@ -11,72 +11,63 @@
 <!doctype html>
 <html lang="en" data-bs-theme="auto">
   <head><script src="../assets/js/color-modes.js"></script>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}" />
-    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">  
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}" /> 
+    <link rel="stylesheet" type="text/css" href="{% static '/css/nfp.css' %}" /> 
   </head>
 
   <body>
     <main>
-      <section class="text-center container">
-        <div class="row py-lg-5">
-          <div class="col-lg-6 col-md-8 mx-auto">
-            <h1 class="fw-light">My Grants</h1>
+      <section >
+        <div class="form_content">
+            <h1 style="text-align:center;">My Grants</h1>
             {% if my_grants %}
             {% else %}
-              <p class="p1">You have not created any grants!</p>
-              <a href="{% url 'Create Grant' %}"><button type="donate" style="margin-left: 20px;">Create New</button></a>
+              <p class="p1" style="text-align:center;">You have not created any grants!</p>
+              <a href="{% url 'Create Grant' %}"><button type="grant">Create New</button></a>
             {% endif %}
           </div>
-        </div>
       </section>
 
       {% for grants in my_grants %}
+        <div class="container h-400">
+        <div class="user_card">
         <h3>{{ grants.grant_name }}</h3>
-        {% for apps in applications %}
-          {% if apps.current_status == 'Pending' and grants.grant_id == apps.grant_id %}
-            {% for orgs in nfp %}
-              {% if orgs.user_id == apps.nfp_id %}
-                <div class="album py-3 bg-body-tertiary">
-                  <div class="container">
-                    <div class="row row-cols-md-3 g-3">
-                      <div class="col">
-                        <div class="card shadow-sm">
-                          <div class="card-body">
-                            <h4 class="card-header">{{orgs.org_name}}</h4>
-                            <p class="card-text">{{apps.body}}</p>
-                            <div class="d-flex justify-content-between align-items-center">
+        <div class="row">
+            {% for apps in applications %}
+              {% if apps.current_status == 'Pending' and grants.grant_id == apps.grant_id %}
+                {% for orgs in nfp %}
+                  {% if orgs.user_id == apps.nfp_id %}
+                          <div class="col-sm-4 ">
+                              <h4 class="card-header">{{orgs.org_name}}</h4>
+                              <p class="subsection">{{apps.body}}</p>
                               <form method="post" action="{% url 'update_application_status' apps.app_id %}">
-                                {% csrf_token %}
+                              {% csrf_token %}
                                 <input type="submit" name="accept" value="Accept">
-                                <input type="submit" name="reject" value="Reject">
+                                <input type="submit" name="reject" value="Reject" style="background-color:#5065A8;">
                               </form>
-                            </div>
                           </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  {% endif %}
+                {% endfor %}
               {% endif %}
             {% endfor %}
-          {% endif %}
-        {% endfor %}
-      {% endfor %}
-    </main>
+          </div>
+        </div>
+        </div>
+      <br>
+    {% endfor %}
+  </main>
     
-    <p>
-    {% if my_grants %}
+  {% if my_grants %}
     <div style="text-align:center;bottom:0px;">
-      <a href="#"><button type="nfp">Back to top</button></a>
+    <a href="#"><button type="nfp">Back to top</button></a>
     </div>
-    {% endif %}
+  {% endif %}
 
-  </body>
+</body>
 </html>
 
 {% endblock %}
