@@ -8,9 +8,11 @@
     font-style: normal;
     font-variation-settings:
     "wdth" 100;
+    font-size: x-large;
   }
 
   td{
     color: #36151E;
     font-family:"Times New Roman", Times, serif ;
+    font-size: large;
   }

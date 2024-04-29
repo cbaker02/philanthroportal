@@ -11,37 +11,40 @@
     <link rel="stylesheet" type="text/css" href="{% static '/css/indv_donation.css' %}" />
 </head>
 
-<h2> My Donation History</h2>
-
-<table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Non-for-Profit</th>
-        <th scope="col">Donation Amount</th>
-        <th scope="col">Date</th>
-      </tr>
-    </thead>
-
-<tbody>
-{% for d in donations%}
-    {% for n in nfps %}
-        {% if d.nfp_id == n.id %}
-        <th scope="row"></th>
-        <td>
-            {{n.org_name}}
-        </td>
-        <td>
-            {{d.amount}}
-        </td>
-        <td">
-            {{d.date_created}}
-        </td>
-        {% endif %}
-
-    
-    {% endfor %}
-{% endfor %}
-</tbody>
-</table>
+<div class ="container-fluid d-flex justify-content-center">
+    <h2> My Donation History</h2>
+</div>
+<br>
+<div class ="container-fluid">
+    <table class="table table-striped border">
+        <thead>
+            <tr>
+                <th scope="col">Non-for-Profit</th>
+                <th scope="col">Donation Amount</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if donations.count == 0 %}
+            <tr>
+                <td>No donations to display</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endif %} 
+            {% for d in donations%}
+                {% for n in nfps %}
+                    {% if d.nfp_id == n.id %}
+                    <tr>
+                        <td>{{n.org_name}}</td>
+                        <td>${{d.amount}}</td>
+                        <td>{{d.date_created}}</td>
+                    </tr>
+                    {% endif %} 
+                {% endfor %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 
 {% endblock %}
