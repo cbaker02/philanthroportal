@@ -1,6 +1,12 @@
-Steps to Run:
-  In terminal:
-  python manage.py runserver (if needed, run as python3)
+Steps to create a Virtual Environment to run:
+In CMD navigate to folder with project
+  python -m venv env1
+  env1\Scripts\activate (Windows) or env1/bin/activate (Linux)
+  pip install django
+  pip install "django-phonenumber-field[phonenumbers]"
+  pip install pillow
+  pip install django-resized
+  python manage.py runserver
 
 Logins:
   -Can navigate around the website without an account
