@@ -20,4 +20,4 @@ Logins:
   Individual:
     email - crb190003@utdallas.edu
     password - philanthro1
-  -Additionally, feel free to register a new user or access any other accounts we have created that is listed in our "Fake   Data" Sheet available in our repo
+  -Additionally, feel free to register a new user or access any other accounts we have created that is listed in our "Fake   Data" Sheet available in our repo or click [here](https://docs.google.com/spreadsheets/d/1JbRy0x-1urKPFeaLnCn9VxenjoQ-hQdHuQsEOm22B3Y/edit?usp=sharing).
