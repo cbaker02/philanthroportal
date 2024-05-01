@@ -1,0 +1,98 @@
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.col-sm-6 {
+  padding: 20px;
+
+}
+
+.card-header{
+    background-color: #E7E6DC;
+}
+.title{
+  color: #36151E;
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+  font-size: 45px
+}
+
+.butFont{
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+  font-size: 25px
+}
+
+.subsection{
+    width: 100%;
+    color: #36151E;
+    font-family:"Times New Roman", Times, serif ;
+}
+
+
+button[type=register] {
+    background-color: #5065A8 ;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /*font info, place all other css above this or it wont work*/
+    font-family: "League Gothic", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings:
+      "wdth" 100;
+    }
+  
+    button[type=register]:hover {
+      background-color: #455791;
+    }
+
+    button[type=nfp] {
+        background-color: #417B5A;
+        color: white;
+        padding: 12px 20px;
+        position: static;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        /*font info, place all other css above this or it wont work*/
+        font-family: "League Gothic", sans-serif;
+          font-optical-sizing: auto;
+          font-weight: 400;
+          font-style: normal;
+          font-variation-settings:
+          "wdth" 100;
+        }
+        
+    button[type=nfp]:hover {
+    background-color: #36674b;
+    }
+
+    .my-img{
+      border-radius: 4px;
+      padding: 5px;
+      width: auto;
+      height: 150px;
+    }

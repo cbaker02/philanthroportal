@@ -1,0 +1,51 @@
+{% extends "base.html" %} {% block title %} My Applications {% endblock %}
+{% block content %}
+{% load static %}
+<!-- 
+    Functional Requirements:
+        View Grant History & Applicants
+-->
+
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/indv_donation.css' %}" />
+</head>
+
+<div class ="container-fluid d-flex justify-content-center">
+    <h2> My Applications</h2>
+</div>
+<br>
+<div class ="container-fluid">
+    <table class="table table-striped border">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Date Changed</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if applications.count == 0 %}
+            <tr>
+                <td>No applications to display</td>
+                <td></td>
+                <td></td>
+            </tr>
+            {% endif %} 
+                {% for apps in applications %}
+                    {% if apps.nfp_id == request.user.id %}
+                       {% for grants in grant_list %}
+                            {% if apps.grant_id == grants.grant_id %}
+                                <tr>
+                                    <td>{{grants.grant_name}}</td>
+                                    <td>{{apps.current_status}}</td>
+                                    <td>{{apps.status_changed}}</td>
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

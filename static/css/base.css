@@ -1,8 +1,359 @@
-body{
-    background-color: #ebeff5;
+/*establishes background color for all pages, padding that words with nav bar, and color for text*/
+body,html{
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  color: #36151E;
+}
+
+/*message cards*/
+.user_card {
+width: 100% !important;
+margin-top: auto;
+margin-bottom: auto;
+/* Change to match company colors */
+background: #fff;
+position: static;
+display: flex;
+justify-content: center;
+flex-direction: column;
+padding: 15px;
+box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+-webkit-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+-moz-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+border-radius: 5px;
+}
+
+.payment_card {
+  width: 50%;
+  margin: auto;
+  /* Change to match company colors */
+  background: #fff;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 15px;
+  box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+  -webkit-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+  -moz-box-shadow: 0 4px 8px 0 #D0CEBA, 0 6px 20px 0 #D0CEBA;
+  border-radius: 5px;
+  }
+
+.p1{
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+
+}
+
+.container {
+  /*padding-right:650px ;*/
+  position: static;
+  left: 0px;
+  top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+
+img {
+  max-width: 100%;
+  max-height:100%;
+}
+
+.text {
+  font-size: 20px;
+  padding-left: 20px;
+}
+
+.form_content{
+  position: static;
+  width: auto;
+  margin: auto;
+}
+
+.form-group{
+  position: static;
+  width: auto;
+
+}
+
+label{
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+}
+
+.table {
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+  font-size: 20px;
+}
+
+
+.form-label{
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+}
+
+h1{
+  color: #36151E;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+}
+
+h2{
+  color: #36151E;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+}
+
+h3{
+  color: #36151E;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+}
+
+h4{
+  color: #36151E;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0 ;
+  overflow: hidden;
+  background-color: #417B5A;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+  
+}
+
+footer {
+  position:static;
+   left:0px;
+   bottom:0px;
+   width:100%;
+   margin-top: 20px;
+  text-align: left;
+  border-radius: 5px;
+  padding: 20px;
+  z-index: 1;
+  background-color: #D0CEBA;
+  color: #36151E;
+  font-family:"Times New Roman", Times, serif ;
+}
+
+li {
+  float: left;
+}
+
+.numbers {
+  color: #36151E;
+font-family:"Times New Roman", Times, serif ;
+}
+
+li a{
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+  font-size: x-large;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
+}
+
+li a:hover {
+  color:#fff;
+  background-color: #36674b;
+}
+
+input, select, textarea {
+width: 100%;
+padding: 12px;
+border: 1 px solid #36151E;
+border-radius: 4px;
+box-sizing: border-box;
+margin-top:6px;
+margin-bottom: 16px;
+resize:vertical;
+color: #36151E;
+font-family:"Times New Roman", Times, serif ;
+}
+
+button[type=reset] {
+  background-color: #5065A8 ;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+  }
+
+  button[type=reset]:hover {
+    background-color: #455791;
+  }
+  
+  button[type=submit] {
+    background-color: #417B5A;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /*font info, place all other css above this or it wont work*/
+    font-family: "League Gothic", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: 400;
+      font-style: normal;
+      font-variation-settings:
+      "wdth" 100;
+    }
+    
+button[type=submit]:hover {
+background-color: #36674b;
 }
 
 .hello-msg{
-    font-size: 18px;
-    margin-right: 20px;
+  font-size: 18px;
+  margin-right: 20px;
+}
+
+.logo{
+  height: 200px;
+  width: auto;
+}
+.hands{
+  height: 250px;
+  width: auto;
+}
+
+.earth{
+  height: auto;
+  width: 400px;
+}
+
+button[type=donate] {
+  background-color: #417B5A;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 75px;
+  width: 150px;
+  font-size: xx-large;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+  }
+  
+button[type=donate]:hover {
+background-color: #36674b;
+}
+
+button[type=nfps] {
+  background-color:#5065A8;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 60px;
+  width: 350px;
+  font-size: x-large;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+  }
+  
+button[type=nfps]:hover {
+background-color: #455791;
+}
+
+button[type=grant] {
+  background-color: #417B5A;
+  position: absolute;
+  left: 47%;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+    "wdth" 100;
+  }
+  
+button[type=grant]:hover {
+background-color: #36674b;
+}
+
+
+input[type=submit] {
+  background-color: #36674b;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  width:50%;
+  position:relative;
+  left:80px;
+  /*font info, place all other css above this or it wont work*/
+  font-family: "League Gothic", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings:
+  "wdth" 100;
 }

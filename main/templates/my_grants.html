@@ -1,0 +1,73 @@
+{% extends "base.html" %} {% block title %} My Grants {% endblock %}
+{% block content %}
+{% load static %}
+
+<!-- 
+    Functional Requirements:
+        View Application
+        Grant Status
+-->
+
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head><script src="../assets/js/color-modes.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/base.css' %}" /> 
+    <link rel="stylesheet" type="text/css" href="{% static '/css/nfp.css' %}" /> 
+  </head>
+
+  <body>
+    <main>
+      <section >
+        <div class="form_content">
+            <h1 style="text-align:center;">My Grants</h1>
+            {% if my_grants %}
+            {% else %}
+              <p class="p1" style="text-align:center;">You have not created any grants!</p>
+              <a href="{% url 'Create Grant' %}"><button type="grant">Create New</button></a>
+            {% endif %}
+          </div>
+      </section>
+
+      {% for grants in my_grants %}
+        <div class="container h-400">
+        <div class="user_card">
+        <h3>{{ grants.grant_name }}</h3>
+        <div class="row">
+            {% for apps in applications %}
+              {% if apps.current_status == 'Pending' and grants.grant_id == apps.grant_id %}
+                {% for orgs in nfp %}
+                  {% if orgs.user_id == apps.nfp_id %}
+                          <div class="col-sm-4 ">
+                              <h4 class="card-header">{{orgs.org_name}}</h4>
+                              <p class="subsection">{{apps.body}}</p>
+                              <form method="post" action="{% url 'update_application_status' apps.app_id %}">
+                              {% csrf_token %}
+                                <input type="submit" name="accept" value="Accept">
+                                <input type="submit" name="reject" value="Reject" style="background-color:#5065A8;">
+                              </form>
+                          </div>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        </div>
+      <br>
+    {% endfor %}
+  </main>
+    
+  {% if my_grants %}
+    <div style="text-align:center;bottom:0px;">
+    <a href="#"><button type="nfp">Back to top</button></a>
+    </div>
+  {% endif %}
+
+</body>
+</html>
+
+{% endblock %}

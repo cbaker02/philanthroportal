@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% block title %}Profile Page{% endblock title %}
+{% block content %}
+<div style="padding-left:30px;">
+
+    <div class="container">
+        <div class="image">
+        <img class="rounded-circle account-img" src="{{user.profile_image.url }} " />
+        </div>
+        <div class="text">
+        <h1>Profile page for {{user.name}}</h1>
+        </div>
+    </div>
+
+    {% if user_form.errors %}
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <div id = "form_errors">
+                {% for key, value in user_form.errors.items %}
+                    <strong>{{value}}</strong>
+                {% endfor %}
+            </div>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+    <div class="container">
+    <div class="form_content">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{new_form.as_p}}
+        </br>
+                    <div class="input">
+                        <label class="input">Change Profile Picture:</label>
+                        {{user_form.profile_image}}      
+                    </div> 
+                    <div class="input">
+                        <label class="input">Email:</label>
+                        <h4>{{user.email}}</h4>
+                    </div>
+                    <div class="input">
+                        <label class="input">Phone Number:</label>
+                        {{user_form.phone}}
+                        <li class="numbers">Enter phone number as (xxx)-xxx-xxxx</li>
+                    </div>
+                </br>
+                </br>
+                    <div class="input">
+                        <a href="{% url 'password_change' %}">Change Password</a>
+                        <hr>
+                    </div>
+                    {% if user.account_type == 'Non-For-Profit Organization' %} 
+                    <div class="input">
+                        <label class="input">Non-For-Profit Name:</label>
+                        <h4>{{user.nfp.org_name}}</h4>
+                    </div>
+                    <div class="input">
+                        <label class="input">Addresss:</label>
+                        {{nfp_form.address}}
+                    </div>
+                    <div class="input">
+                        <label class="input">Addresss2:</label>
+                        {{nfp_form.address2}}
+                    </div>
+                    <div class="input">
+                        <label class="input">City:</label>
+                        {{nfp_form.city}}
+                    </div>
+                    <div class="input">
+                        <label class="input">State:</label>
+                        {{nfp_form.state}}
+                    </div>
+                    <div class="input">
+                        <label class="input">Zip Code:</label>
+                        {{nfp_form.zipCode}}
+                    </div>
+                    <div class="input">
+                        <label class="input">Desired Donation Items:</label>
+                        {{nfp_form.items}}
+                    </div>
+                    <div class="input">
+                        <label class="input">Bio:</label>
+                        {{nfp_form.bio}}
+                    </div>
+                    {%endif%} 
+                      
+                    {% if user.account_type == 'Corporation' %} 
+                    <div class="input">
+                        <label class="input">Corporation Name:</label>
+                        <h4>{{user.corporation.corp_name}}</h4>
+                    </div>
+                    <div class="input">
+                        <label class="input">Addresss:</label>
+                        {{corp_form.address}}
+                    </div>
+                    <div class="input">
+                        <label class="input">Addresss2:</label>
+                        {{corp_form.address2}}
+                    </div>
+                    <div class="input">
+                        <label class="input">City:</label>
+                        {{corp_form.city}}
+                    </div>
+                    <div class="input">
+                        <label class="input">State:</label>
+                        {{corp_form.state}}
+                    </div>
+                    <div class="input">
+                        <label class="input">Zip Code:</label>
+                        {{corp_form.zipCode}}
+                    </div>
+                    <div class="input">
+                        <label class="input">Bio:</label>
+                        {{corp_form.bio}}
+                    </div>
+                    {%endif%}         
+            <br>
+            <button type="submit" class="btn btn-dark btn-lg">Save Changes</button>    
+            <button type="reset" class="btn btn-dark btn-lg">Reset</button>
+            <br>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock content %}

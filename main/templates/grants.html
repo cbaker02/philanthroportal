@@ -1,0 +1,57 @@
+{% extends "base.html" %} {% block title %} Grants Page {% endblock %}
+{% block content %}
+{% load static %}
+
+<!-- 
+    Functional Requirements:
+        Corporation advertise for Grants
+        View Corporation profiles
+-->
+
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head><script src="../assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{% static '/css/nfp.css' %}" />
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">  
+  </head>
+
+<body>
+<main>
+  <section class="text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1> Grants </h1>
+        <p class="p1"> Below are the current grants offered by Philanthroportal's partner companies. </p>
+      </div>
+    </div>
+  </section>
+  <!-- Figure out how to make 3 across -->
+  <div class="container">
+    <div class="row">
+        {% for grants in grant_list %}
+        <div class="col-sm-6">
+            <img src="/static/images/Philanthroportal-logos_transparent.png" width=height=auto />
+              <h4 class="card-header butFont">{{grants.grant_name}}</h4>
+              <p class="card-text subsection">{{grants.description}}</p>
+                  <button class="btn btn-sm btn-outline-secondary">${{grants.amount}}</button>
+                  <!-- Apply to Grant **Accesses Grant Application Page** -->
+                  <a href="{% url 'Grant Application' %}"><button type="nfp">Apply</button></a>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</main>
+
+<div style="text-align:center;bottom:0px;">
+  <a href="#"><button type="nfp">Back to top</button></a>
+</div>
+
+</body>
+</html>
+
+{% endblock %}

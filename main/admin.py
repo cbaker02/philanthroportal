@@ -1,14 +1,18 @@
+# main/admin.py
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import *
 # Register your models here.
 
-from .models import Nfp, Corporation
+from .models import Nfp, Corporation, Grant, GrantApplication, Donation
 
 admin.site.register(Nfp)
 admin.site.register(Corporation)
+admin.site.register(Grant)
+admin.site.register(GrantApplication)
+admin.site.register(Donation)
 
 
 class CustomUserAdmin(UserAdmin):
@@ -22,7 +26,7 @@ class CustomUserAdmin(UserAdmin):
     list_filter = ()
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Personal info', {'fields': ('name', 'phone')})
+        ('Personal info', {'fields': ('name', 'phone', 'profile_image', 'account_type')})
     )
     add_fieldsets = (
     (None, {
@@ -32,4 +36,3 @@ class CustomUserAdmin(UserAdmin):
 )
 
 admin.site.register(CustomUser, CustomUserAdmin)
-

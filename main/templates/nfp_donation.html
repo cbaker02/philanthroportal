@@ -1,0 +1,80 @@
+{% extends "base.html" %} {% block title %} NFP Donation {% endblock %}
+{% block content %}
+{% load static %}
+
+<!-- 
+    Functional Requirements:
+        View Donations from Grants
+        View Donations from Individuals
+-->
+<head>
+  <link rel="stylesheet" type="text/css" href="{% static '/css/indv_donation.css' %}" />
+</head>
+
+<body>
+  <div class ="container-fluid d-flex justify-content-center">
+    <h2>Donation History</h2>
+  </div>
+
+<h4>Grants Awarded </h4>
+<div class ="container-fluid">
+  <table class="table table-striped border">
+      <thead>
+          <tr>
+              <th scope="col">Grant</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Date</th>
+          </tr>
+      </thead>
+      <tbody>
+      {% for apps in applications %}
+        {% if apps.nfp_id == request.user.id %}
+          {% if apps.current_status == "Accepted" %}
+            {% for grants in grant_list %}
+              {% if apps.grant_id == grants.grant_id %}
+              <tr>
+                <td>{{grants.name}}</td>
+                <td>${{grants.amount}}</td>
+                <td>{{apps.status_change}}</td>
+              </tr>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<br>
+<h4>Donations Recieved</h4>
+<div class ="container-fluid">
+  <table class="table table-striped border">
+      <thead>
+          <tr>
+              <th scope="col">Donor</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Date</th>
+          </tr>
+      </thead>
+      <tbody>
+      {% for dons in donations %}
+        {% for n in nfps %}
+          {% if dons.nfp_id == n.id %}
+            {% if n.user_id == request.user.id %}
+              {% for p in people %}
+                {% if dons.user_id == p.id %}
+                <tr>
+                  <td>{{p.name}}</td>
+                  <td>${{dons.amount}}</td>
+                  <td>{{dons.date_created}}</td>
+                </tr>
+                {% endif %}
+              {% endfor %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
